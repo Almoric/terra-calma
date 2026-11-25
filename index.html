@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra Calma — כלי קרמיקה בעבודת יד</title>
+<meta name="description" content="כלי אוכל ונוי מקרמיקה בעבודת יד. מינימליזם אורגני, חימר גולמי וגלזורות טבעיות בגווני אדמה ומנטה פסטלי.">
+<meta property="og:title" content="Terra Calma — כלי קרמיקה בעבודת יד">
+<meta property="og:description" content="כלי אוכל ונוי מקרמיקה בעבודת יד. מינימליזם אורגני, חימר גולמי וגלזורות טבעיות בגווני אדמה ומנטה פסטלי.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/challah-plate.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400&family=Heebo:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: שקט, אורגני, איטי — ואז אש. נשימה ליד האובניים, חום של תנור.
+IDEA: הגלילה היא האובניים: גוש החימר נמשך לכלי, נכנס לתנור, יוצא מזוגג ומצטרף לטבעת הקולקציה.
+PICTURE: אובניים תלת-ממדי עם אבק חימר וגיצים, וטבעת תלת-ממדית של התמונות האמיתיות.
+COLOUR and TYPE: חול #FAF8F5, אדמה #6D5C4E, מנטה #CBE3D3, ירוק עמוק #1C3426, גחלת #E9824A · Heebo / Assistant / Cormorant Garamond.
+LAYOUT: במה קבועה להירו ולתהליך, טבעת מוצרים נעוצה, קטלוג, סיפור, מידע, הזמנה; פס הזמנה דביק במובייל.
+*/
+:root{color-scheme:light;
+  --canvas:#FAF8F5;--cream:#F3EFE9;--sand:#E9E2D8;--mint:#CBE3D3;--mint-h:#BBD8C5;--mint-deep:#1C3426;
+  --earth:#6D5C4E;--stone:#6F675F;--ink:#2B2623;--soft:#5C534B;--line:#E4DDD3;--clay:#9A6F55;--ember:#E9824A;
+  --fh:"Heebo",system-ui,sans-serif;--fb:"Assistant",system-ui,sans-serif;--fbrand:"Cormorant Garamond",Georgia,serif;
+  --ease:cubic-bezier(.22,1,.36,1);--glow:0}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.6 var(--fb);overflow-x:clip;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+::selection{background:var(--mint);color:var(--mint-deep)}
+h1,h2,h3{font-family:var(--fh);font-weight:300;margin:0;text-wrap:balance}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(5vw,18px)}
+.brand{font-family:var(--fbrand);font-weight:500;letter-spacing:.04em;direction:ltr;unicode-bidi:isolate}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:50px;padding:.7em 1.6em;border-radius:999px;border:0;font:500 15.5px var(--fh);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background .25s,box-shadow .4s var(--ease),color .25s;will-change:transform}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--mint-deep);outline-offset:3px}
+.btn-mint{background:var(--mint);color:var(--mint-deep)}.btn-mint:hover{background:var(--mint-h);box-shadow:0 14px 34px -12px rgba(28,52,38,.5)}
+.btn-ink{background:var(--ink);color:var(--canvas)}.btn-ink:hover{background:#3f3834;box-shadow:0 14px 34px -12px rgba(43,38,35,.6)}
+.btn-ghost{background:rgba(243,239,233,.72);color:var(--ink);border:1px solid #D8CFC3;backdrop-filter:blur(6px)}
+.btn-wa{background:#25D366;color:#0b3d1f}.btn-wa:hover{background:#2be070;box-shadow:0 14px 34px -12px rgba(37,211,102,.7)}
+.ico{width:18px;height:18px;flex:none}
+.eyebrow{font-size:15px;color:var(--stone);margin:0 0 .7em}
+.h2{font-size:clamp(34px,5vw,60px);line-height:1.04}
+
+/* grain */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:95;opacity:.07;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:100;background:var(--canvas);display:grid;place-items:center;transition:clip-path 1.1s var(--ease);clip-path:inset(0 0 0 0)}
+#loader.out{clip-path:inset(0 0 100% 0)}
+.ld{display:flex;flex-direction:column;align-items:center;gap:18px}
+.ld svg{width:84px;height:84px;animation:spin 1.6s linear infinite}
+.ld circle{fill:none;stroke:var(--clay);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:60 200;animation:dash 1.6s var(--ease) infinite}
+.ld .brand{font-size:30px;opacity:.85}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes dash{50%{stroke-dasharray:170 200}}
+
+/* cursor */
+#cur{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid var(--earth);pointer-events:none;z-index:96;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .3s,border-color .3s;display:none}
+#cur.big{width:70px;height:70px;margin:-35px 0 0 -35px;background:rgba(203,227,211,.35);border-color:var(--mint-deep)}
+@media(hover:hover) and (pointer:fine){#cur{display:block}}
+
+#bar{position:fixed;top:0;right:0;height:3px;width:100%;transform-origin:right;transform:scaleX(0);background:linear-gradient(270deg,var(--clay),var(--ember),var(--mint));z-index:60}
+
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,box-shadow .4s,transform .5s var(--ease)}
+header.solid{background:rgba(250,248,245,.86);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+header.hide{transform:translateY(-100%)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.hd .brand{font-size:29px;text-decoration:none}
+nav.main{display:flex;gap:28px;font-size:15px;color:var(--soft)}
+nav.main a{text-decoration:none;position:relative;padding:4px 0}
+nav.main a::after{content:"";position:absolute;inset:auto 0 -2px;height:1px;background:var(--ink);transform:scaleX(0);transition:transform .4s var(--ease)}
+nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
+.hd-act{display:flex;gap:10px;align-items:center}
+#menuBtn{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--canvas);cursor:pointer;color:var(--ink)}
+#mob{display:none}
+@media(max-width:900px){nav.main{display:none}#menuBtn{display:inline-grid;place-items:center}.hd .btn span{display:none}.hd .btn{padding:0;width:46px;min-height:46px}
+  #mob.open{display:flex;flex-direction:column;padding:8px max(5vw,18px) 18px;background:rgba(250,248,245,.97);border-bottom:1px solid var(--line)}
+  #mob a{min-height:52px;display:flex;align-items:center;font:300 24px var(--fh);text-decoration:none;border-bottom:1px solid var(--line)}}
+
+/* stage */
+.stage-bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 60% at 30% 62%,#fff 0%,var(--cream) 45%,var(--sand) 100%);overflow:hidden}
+.kiln{position:absolute;inset:0;opacity:var(--glow);background:radial-gradient(ellipse 55% 55% at 28% 62%,rgba(255,170,90,.75),rgba(196,82,34,.45) 42%,rgba(60,24,10,.2) 72%,transparent 90%)}
+.giant{position:absolute;left:0;right:0;bottom:4vh;text-align:center;direction:ltr;font:italic 300 clamp(90px,20vw,330px)/.85 var(--fbrand);color:transparent;-webkit-text-stroke:1px rgba(109,92,78,.28);white-space:nowrap;will-change:transform,opacity;user-select:none}
+#stage{position:fixed;inset:0;z-index:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+#stage.drag{cursor:grabbing}
+.over{position:relative;z-index:2;pointer-events:none}
+.over a,.over button,.over .chips{pointer-events:auto}
+
+/* hero */
+#hero{min-height:100svh;display:flex;align-items:center}
+#hero .wrap{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
+.hero-txt{padding-top:60px}
+.hero-txt h1{font-size:clamp(46px,6.8vw,96px);line-height:1.0;font-weight:200;letter-spacing:-.015em}
+.hero-txt h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em}
+.hero-txt h1 .w>span{display:inline-block;transform:translateY(115%) rotate(5deg);transition:transform 1.3s var(--ease)}
+.ready .hero-txt h1 .w>span{transform:none}
+.hero-txt .lead{font-size:clamp(17px,1.5vw,20px);color:var(--soft);max-width:30em;margin:1.2em 0 2em}
+.fade-up{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.ready .fade-up{opacity:1;transform:none}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:26px;font-size:14.5px;color:var(--soft)}
+.trust span{display:inline-flex;align-items:center;gap:6px}
+.trust svg{width:16px;height:16px;color:var(--mint-deep)}
+.scroll-hint{position:absolute;bottom:26px;right:50%;transform:translateX(50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:var(--stone)}
+.scroll-hint i{width:1px;height:46px;background:linear-gradient(var(--earth),transparent);animation:drip 2.2s var(--ease) infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.hero-fallback{display:none}
+
+/* process */
+#process{height:560vh;position:relative}
+.sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center}
+.sticky .wrap{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
+.steps{position:relative;display:grid}
+.step{grid-area:1/1;opacity:0;pointer-events:none;transform:translateY(34px);filter:blur(8px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s}
+.step.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+.step .num{font:italic 300 clamp(70px,9vw,130px)/.9 var(--fbrand);color:var(--clay);opacity:.6;display:block;margin-bottom:.12em;transition:color .6s}
+.hot .step .num{color:var(--ember);opacity:.95}
+.step h2{font-size:clamp(38px,5vw,66px);line-height:1.02}
+.step p{color:var(--soft);font-size:18.5px;max-width:25em;margin:.8em 0 0}
+.dots{display:flex;gap:10px;margin-bottom:26px}
+.dots i{width:40px;height:3px;border-radius:3px;background:rgba(109,92,78,.2);overflow:hidden;position:relative}
+.dots i b{position:absolute;inset:0;background:var(--earth);transform:scaleX(0);transform-origin:right}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #D8CFC3;background:rgba(250,248,245,.85);font:400 15px var(--fh);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,border-color .2s,transform .3s var(--ease)}
+.chip:hover{transform:translateY(-2px)}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
+.chip .sw{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.chip-lbl{font-size:14px;color:var(--stone);margin:18px 0 0}
+.drag-hint{font-size:14px;color:var(--stone);margin-top:14px;display:flex;align-items:center;gap:8px}
+
+
+/* story */
+#story{height:1000vh;position:relative;background:#1d1713}
+.st{position:sticky;top:0;height:100svh;overflow:hidden;color:var(--canvas)}
+#storyGL{position:absolute;inset:0;width:100%;height:100%;display:block}
+.st-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(270deg,rgba(24,18,14,.84) 0%,rgba(24,18,14,.5) 36%,rgba(24,18,14,0) 64%),linear-gradient(0deg,rgba(24,18,14,.5),transparent 32%)}
+.st-wrap{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding-top:60px}
+.chs{display:grid;max-width:580px;width:100%}
+.ch{grid-area:1/1;align-self:center;opacity:0;transform:translateY(44px);filter:blur(10px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s;pointer-events:none}
+.ch.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+.ch .num{font:italic 300 clamp(70px,9vw,128px)/.9 var(--fbrand);color:var(--ember);display:block}
+.ch .kick{font:400 15px var(--fh);color:#e3c7ad;margin:.4em 0 .5em}
+.ch h1{font-size:clamp(46px,6.6vw,94px);line-height:1;font-weight:200;letter-spacing:-.015em}
+.ch h2{font-size:clamp(42px,5.8vw,82px);line-height:1.02;font-weight:200}
+.ch>p:not(.kick){font-size:clamp(17px,1.5vw,20px);color:#eadfd3;max-width:27em;margin:.9em 0 0}
+.ch .lead{margin:1.1em 0 1.8em!important}
+.ch-img{display:none}
+.st .btn-ghost{background:rgba(250,248,245,.1);color:var(--canvas);border-color:rgba(250,248,245,.32)}
+.st .trust{color:#eadfd3}.st .trust svg{color:var(--mint)}
+.rail{position:absolute;left:max(5vw,18px);top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:4px}
+.rail button{display:flex;align-items:center;gap:12px;background:none;border:0;color:rgba(250,248,245,.45);font:400 14px var(--fh);cursor:pointer;min-height:34px;padding:0;transition:color .3s}
+.rail button i{width:20px;height:1px;background:currentColor;transition:width .5s var(--ease),background .3s}
+.rail button:hover{color:rgba(250,248,245,.85)}
+.rail button.on{color:var(--canvas)}.rail button.on i{width:48px;background:var(--ember)}
+.cap{position:absolute;left:max(5vw,18px);bottom:28px;z-index:3;display:flex;gap:12px;align-items:center;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(250,248,245,.13);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(250,248,245,.22);color:var(--canvas);text-decoration:none;font-size:14.5px;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.cap.off{opacity:0;transform:translateY(14px);pointer-events:none}
+.cap .pr{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cap .go{background:#25D366;color:#0b3d1f;border-radius:999px;padding:8px 14px;font:500 14px var(--fh);white-space:nowrap}
+.st .scroll-hint{color:#e3c7ad;z-index:3}.st .scroll-hint i{background:linear-gradient(#e3c7ad,transparent)}
+.st .scroll-hint.gone{opacity:0!important}
+@media(max-width:900px){
+  .st-shade{background:linear-gradient(0deg,rgba(24,18,14,.9) 0%,rgba(24,18,14,.6) 42%,rgba(24,18,14,0) 70%)}
+  .st-wrap{align-items:flex-end;padding-bottom:110px}
+  .ch{align-self:end}.ch .num{font-size:56px}
+  .rail{display:none}
+  .cap{top:86px;bottom:auto;left:12px;right:12px;justify-content:space-between}
+  .st .scroll-hint{display:none}
+}
+.no3d #story{height:auto}
+.no3d .st{position:relative;height:auto;overflow:visible}
+.no3d #storyGL,.no3d .rail,.no3d .cap,.no3d .st-shade,.no3d .st .scroll-hint{display:none}
+.no3d .st-wrap{display:block;padding:120px max(5vw,18px) 80px}
+.no3d .chs{max-width:none;gap:80px}
+.no3d .ch{grid-area:auto;opacity:1;transform:none;filter:none;pointer-events:auto}
+.no3d .ch-img{display:block;width:100%;max-height:72vh;object-fit:cover;border-radius:30px;margin-top:26px}
+
+/* solid sections cover the stage */
+.solid{position:relative;z-index:3;background:var(--canvas)}
+.marq{position:relative;z-index:3;background:var(--ink);color:var(--canvas);overflow:hidden;padding:24px 0;border-radius:44px 44px 0 0;margin-top:-44px}
+.marq-in{display:flex;width:max-content;will-change:transform}
+.marq span{font:200 clamp(26px,3.4vw,46px) var(--fh);white-space:nowrap;padding-inline:30px;display:flex;align-items:center;gap:60px}
+.marq span::after{content:"";width:13px;height:13px;border-radius:50% 40% 55% 45%;background:var(--mint)}
+
+/* showcase ring */
+#showcase{height:480vh;background:var(--mint-deep);color:var(--canvas)}
+#showcase .sticky{overflow:hidden}
+#ring{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sc-glow{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 32% 50%,rgba(203,227,211,.16),transparent 70%)}
+.sc-panel{position:relative;z-index:2;max-width:440px;background:rgba(20,40,29,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(203,227,211,.14);border-radius:30px;padding:30px}
+.sc-panel .eyebrow{color:#a9c7b4}
+.sc-count{font:italic 300 22px var(--fbrand);color:#a9c7b4;margin:22px 0 6px;direction:ltr;text-align:right}
+.sc-info{transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.sc-info.swap{opacity:0;transform:translateY(18px)}
+.sc-info .note{font-size:15px;color:#a9c7b4;margin:0}
+.sc-info h3{font-size:clamp(30px,3.4vw,44px);line-height:1.1;margin:.25em 0 .2em;font-weight:300}
+.sc-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sc-price{font:300 clamp(34px,3.6vw,48px) var(--fh);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sc-dim{font-size:15px;color:#c7d8cd}
+.sc-bar{display:flex;gap:6px;margin-top:28px}
+.sc-bar i{flex:1;height:3px;border-radius:3px;background:rgba(203,227,211,.18);transition:background .4s}
+.sc-bar i.on{background:var(--mint)}
+.sc-hint{position:absolute;bottom:26px;left:max(5vw,18px);font-size:13px;color:#a9c7b4;z-index:2}
+
+/* catalog */
+#collection{padding:clamp(70px,10vw,140px) 0}
+.col-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:46px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;padding:6px;border-radius:999px;background:var(--cream);border:1px solid var(--line)}
+.tab{min-height:44px;padding:0 18px;border-radius:999px;border:0;background:transparent;font:400 15px var(--fh);color:var(--soft);cursor:pointer;transition:background .3s,color .3s}
+.tab[aria-selected=true]{background:var(--mint);color:var(--mint-deep);font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,34px)}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{perspective:1100px}
+.card-in{display:flex;flex-direction:column;height:100%;background:var(--cream);border-radius:30px;overflow:hidden;border:1px solid var(--line);transform-style:preserve-3d;transition:transform .7s var(--ease),box-shadow .7s var(--ease)}
+.card:hover .card-in{box-shadow:0 34px 70px -34px rgba(60,40,25,.4)}
+.ph{position:relative;aspect-ratio:10/11;overflow:hidden;background:#EFEAE2}
+.ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:transform 1.8s var(--ease)}
+.card:hover .ph img{transform:scale(1.04)}
+.ph .tag{position:absolute;top:14px;right:14px;background:rgba(250,248,245,.9);backdrop-filter:blur(6px);padding:4px 12px;border-radius:999px;font-size:13px;color:var(--soft)}
+.ph .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(110%);transition:transform 1.1s var(--ease);pointer-events:none}
+.card:hover .shine{transform:translateX(-110%)}
+.info{padding:22px;display:flex;flex-direction:column;flex:1}
+.info .note{font-size:14px;color:var(--stone);margin:0}
+.info .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-top:6px}
+.info h3{font-size:21px;font-weight:400;line-height:1.3}
+.price{font:500 21px var(--fh);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dim{font-size:14px;color:var(--stone);margin:6px 0 18px}
+.info .btn{margin-top:auto;width:100%}
+.rv{opacity:0;transform:translateY(70px) rotateX(10deg) scale(.95);transform-origin:50% 100%;transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv .ph{clip-path:circle(0% at 50% 100%);transition:clip-path 1.6s var(--ease) .15s}
+.rv.in .ph{clip-path:circle(150% at 50% 100%)}
+.rv-t{opacity:0;transform:translateY(44px);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.rv-t.in{opacity:1;transform:none}
+
+/* about */
+#about{background:var(--cream);padding:clamp(80px,11vw,160px) 0;overflow:hidden}
+.ab{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,6vw,90px);align-items:center}
+.blobs{position:relative;max-width:480px;width:100%;margin:0 auto;aspect-ratio:4/5}
+.blob{position:absolute}
+.blob .mask{position:absolute;inset:0;overflow:hidden;border-radius:46% 54% 42% 58%/52% 40% 60% 48%;animation:morph 14s ease-in-out infinite;box-shadow:0 40px 80px -40px rgba(60,40,25,.45)}
+.blob img{width:100%;height:120%;object-fit:cover;will-change:transform}
+.b1{inset:0 0 14% 18%}
+.b2{width:46%;aspect-ratio:3/4;left:0;bottom:0}
+.b2 .mask{border-radius:55% 45% 50% 50%/45% 55% 45% 55%;animation-duration:11s;animation-direction:reverse;border:6px solid var(--cream)}
+.ring2{position:absolute;inset:-4% -2% 10% 14%;border:1px solid rgba(109,92,78,.35);border-radius:52% 48% 58% 42%/45% 55% 45% 55%;animation:morph 18s ease-in-out infinite reverse}
+@keyframes morph{0%,100%{border-radius:46% 54% 42% 58%/52% 40% 60% 48%}33%{border-radius:58% 42% 52% 48%/42% 58% 42% 58%}66%{border-radius:40% 60% 46% 54%/58% 46% 54% 42%}}
+.story{font:300 clamp(22px,2.4vw,32px)/1.55 var(--fh);margin:.6em 0 0}
+.story .wd{opacity:.14;transition:opacity .5s}
+.story .wd.lit{opacity:1}
+.hand{display:flex;gap:44px;flex-wrap:wrap;margin-top:44px;padding-top:30px;border-top:1px solid #DED5C8}
+.hand b{display:block;font:200 clamp(44px,5vw,70px)/1 var(--fh);font-variant-numeric:tabular-nums}
+.hand span{font-size:15px;color:var(--soft)}
+
+/* care */
+#care{padding:clamp(70px,10vw,140px) 0}
+.care{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:46px}
+@media(max-width:1000px){.care{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.care{grid-template-columns:minmax(0,1fr)}}
+.ci{padding:30px;border-radius:30px;background:var(--cream);border:1px solid var(--line);transition:transform .6s var(--ease),background .4s}
+.ci:hover{transform:translateY(-6px);background:#EFE9E1}
+.ci svg{width:56px;height:56px;color:var(--mint-deep);background:rgba(203,227,211,.75);border-radius:20px;padding:13px}
+.ci svg path,.ci svg circle,.ci svg rect{stroke-dasharray:120;stroke-dashoffset:120;transition:stroke-dashoffset 1.8s var(--ease) .3s}
+.ci.in svg path,.ci.in svg circle,.ci.in svg rect{stroke-dashoffset:0}
+.ci h3{font-size:20px;font-weight:500;margin:18px 0 8px}
+.ci p{font-size:15.5px;color:var(--soft);margin:0}
+
+
+/* AI concept */
+#concept{background:var(--cream);padding:clamp(80px,11vw,150px) 0;overflow:hidden}
+#concept .glowbg{position:absolute;width:900px;height:900px;left:-300px;top:-200px;border-radius:50%;background:radial-gradient(circle,rgba(233,130,74,.16),transparent 62%);pointer-events:none;animation:float 12s ease-in-out infinite}
+.cc{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(30px,5vw,80px);align-items:center;position:relative}
+.ai-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--ink);color:var(--canvas);font:500 14px var(--fh);margin-bottom:18px}
+.ai-badge i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 0 rgba(203,227,211,.8);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(203,227,211,0)}100%{box-shadow:0 0 0 0 rgba(203,227,211,0)}}
+.cc .lead{color:var(--soft);font-size:18px;max-width:32em}
+.prompt{margin-top:26px;background:var(--canvas);border:1px solid #DED5C8;border-radius:28px;padding:10px;transition:box-shadow .3s,border-color .3s}
+.prompt:focus-within{border-color:var(--earth);box-shadow:0 0 0 5px rgba(203,227,211,.6)}
+.prompt textarea{width:100%;border:0;background:transparent;resize:none;font:17px/1.55 var(--fb);color:var(--ink);padding:12px 14px;min-height:110px}
+.prompt textarea:focus{outline:none}
+.prompt-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:4px 6px 4px 4px}
+.prompt-row small{color:var(--stone);font-size:13px;padding-inline-start:10px;font-variant-numeric:tabular-nums}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sugg .chip{font-size:14px;min-height:40px}
+.ai-note{font-size:13.5px;color:var(--stone);margin:16px 0 0;max-width:36em}
+.frame{position:relative;aspect-ratio:1;max-width:540px;width:100%;margin:0 auto}
+.frame .fm{position:absolute;inset:0;border-radius:46% 54% 42% 58%/52% 40% 60% 48%;overflow:hidden;background:linear-gradient(140deg,#efe7dc,#e3d6c5);animation:morph 16s ease-in-out infinite;box-shadow:0 50px 90px -45px rgba(60,40,25,.5)}
+.frame .fm img{width:100%;height:100%;object-fit:cover;clip-path:circle(0% at 50% 50%);transition:clip-path 1.6s var(--ease)}
+.frame .fm img.on{clip-path:circle(75% at 50% 50%)}
+.frame .ring3{position:absolute;inset:-16px;border:1px dashed rgba(109,92,78,.4);border-radius:50%;animation:spin 40s linear infinite}
+.empty,.busy,.fail{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16%;color:var(--soft);font-size:16px}
+.empty svg{width:64px;height:64px;color:var(--clay);margin:0 auto 12px;display:block;opacity:.8}
+.busy{background:radial-gradient(circle at 50% 60%,rgba(255,170,90,.55),rgba(196,82,34,.25) 45%,transparent 70%);color:var(--ink)}
+.busy .ld svg{animation:spin 1.2s linear infinite}
+.busy b{display:block;font:300 22px var(--fh);margin-top:12px;transition:opacity .3s}
+.fail{color:var(--ink)}
+.res-act{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
+@media(max-width:900px){.cc{grid-template-columns:minmax(0,1fr)}.frame{max-width:400px}}
+
+/* order */
+#order{background:var(--ink);color:var(--canvas);padding:clamp(80px,11vw,150px) 0 clamp(70px,9vw,120px);border-radius:44px 44px 0 0;overflow:hidden}
+#order .eyebrow{color:#b9ada1}
+.or{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,5vw,80px);position:relative;z-index:1}
+#order .lead{color:#d6ccc1;font-size:18px}
+.links{display:grid;gap:12px;margin-top:32px}
+.lk{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:60px;padding:0 22px;border-radius:20px;border:1px solid #4a423d;text-decoration:none;transition:background .3s,border-color .3s}
+.lk:hover{background:#352f2b;border-color:#6a5f57}
+.lk span{display:flex;align-items:center;gap:12px;font:500 15px var(--fh)}
+.lk small{font-size:15px;color:#b9ada1;direction:ltr;font-variant-numeric:tabular-nums}
+.form{background:var(--canvas);color:var(--ink);border-radius:34px;padding:clamp(24px,3.4vw,46px)}
+.fr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media(max-width:560px){.fr{grid-template-columns:minmax(0,1fr)}}
+.fl{display:block;margin-bottom:18px}
+.fl span{display:block;font:400 15px var(--fh);margin-bottom:6px}
+.fl input,.fl select,.fl textarea{width:100%;font:16px var(--fb);color:var(--ink);background:#fff;border:1px solid #DED5C8;border-radius:16px;padding:13px 16px;transition:border-color .2s,box-shadow .2s}
+.fl input:focus,.fl select:focus,.fl textarea:focus{outline:none;border-color:var(--earth);box-shadow:0 0 0 4px rgba(203,227,211,.6)}
+.err{color:#8C3D2B;font-size:15px;font-weight:500;min-height:1.4em;margin:0 0 10px}
+.done h3{font-size:28px;font-weight:400;margin:16px 0 8px}
+.done .sum{background:var(--cream);border-radius:16px;padding:14px 18px;font-size:15px;color:var(--soft);margin:18px 0 22px;overflow-wrap:anywhere}
+.done .chk{width:58px;height:58px;border-radius:50%;background:var(--mint);display:grid;place-items:center;color:var(--mint-deep);animation:pop .7s var(--ease)}
+@keyframes pop{from{transform:scale(.2);opacity:0}}
+.orb{position:absolute;width:640px;height:640px;left:-240px;bottom:-320px;border-radius:50%;background:radial-gradient(circle,rgba(233,130,74,.22),transparent 65%);pointer-events:none;animation:float 9s ease-in-out infinite}
+.orb.b{left:auto;right:-260px;top:-300px;bottom:auto;background:radial-gradient(circle,rgba(203,227,211,.18),transparent 65%);animation-delay:-4s}
+@keyframes float{50%{transform:translate(40px,-30px) scale(1.08)}}
+
+footer{background:var(--ink);color:#d6ccc1;padding:0 0 40px;position:relative;z-index:3}
+.ft{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid #4a423d;padding-top:30px}
+.ft .brand{font-size:32px;color:var(--canvas)}
+.ft nav{display:flex;flex-wrap:wrap;gap:22px;font-size:15px}
+.ft nav a{text-decoration:none}.ft nav a:hover{color:#fff}
+.ft-giant{font:italic 300 clamp(70px,16vw,250px)/.8 var(--fbrand);color:transparent;-webkit-text-stroke:1px #4a423d;text-align:center;direction:ltr;white-space:nowrap;overflow:hidden;padding:40px 0 10px;user-select:none}
+
+/* FAB + mobile bar */
+#fab{position:fixed;left:22px;bottom:22px;z-index:70;width:64px;height:64px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(0,0,0,.4);transition:transform .4s var(--ease);text-decoration:none}
+#fab:hover{transform:scale(1.08) rotate(-6deg)}
+#fab::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:ring 2.6s ease-out infinite}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.7);opacity:0}}
+#fab svg{width:30px;height:30px}
+#mbar{display:none}
+@media(max-width:900px){
+  #fab{display:none}
+  #mbar{position:fixed;inset:auto 10px 10px;z-index:70;display:flex;gap:8px;padding:8px;border-radius:999px;background:rgba(43,38,35,.92);backdrop-filter:blur(10px);transform:translateY(140%);transition:transform .6s var(--ease)}
+  #mbar.on{transform:none}
+  #mbar .btn{flex:1;min-height:48px;padding:0 12px;font-size:15px}
+}
+
+/* narrow */
+@media(max-width:900px){
+  #hero .wrap,.sticky .wrap,.ab,.or{grid-template-columns:minmax(0,1fr)}
+  #hero{align-items:flex-end;padding-bottom:96px}
+  .hero-txt{padding:40px 18px 0;margin:0 -18px;background:linear-gradient(transparent,rgba(250,248,245,.94) 24%)}
+  .giant{bottom:auto;top:16vh}
+  .sticky{align-items:flex-end;padding-bottom:24px}
+  .pcol{background:rgba(250,248,245,.86);backdrop-filter:blur(8px);border-radius:28px;padding:18px 20px;margin:0 -6px}
+  .dots{margin-bottom:14px}.step h2{font-size:32px}.step p{font-size:16px}.step .num{font-size:54px}.drag-hint{display:none}.chip-lbl{margin-top:10px}
+  #showcase .sticky{align-items:flex-end;padding-bottom:28px}
+  .sc-panel{padding:20px;max-width:none;background:rgba(20,40,29,.75)}
+  .sc-bar{margin-top:16px}.sc-hint{display:none}.sc-count{margin-top:8px}
+  .blobs{max-width:360px}
+}
+/* no WebGL */
+.no3d #stage,.no3d #showcase{display:none}
+.no3d #process{height:auto}
+.no3d #process .sticky{position:relative;height:auto;padding:90px 0}
+.no3d .steps{gap:44px}
+.no3d .step{grid-area:auto;opacity:1;transform:none;filter:none}
+.no3d .dots,.no3d .drag-hint,.no3d .chips,.no3d .chip-lbl,.no3d .scroll-hint{display:none}
+.no3d .hero-fallback{display:block;border-radius:50% 50% 48% 52%/55% 55% 45% 45%;overflow:hidden;max-width:440px;aspect-ratio:3/4;margin:auto}
+.no3d .hero-fallback img{width:100%;height:100%;object-fit:cover}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body class="lock">
+<div id="loader" aria-hidden="true"><div class="ld"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34"/></svg><span class="brand">Terra Calma</span></div></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="bar"></div>
+<header id="hdr" class="solid">
+  <div class="wrap hd">
+    <a href="#top" class="brand">Terra Calma</a>
+    <nav class="main" aria-label="ניווט ראשי">
+      <a href="#story">הסיפור</a><a href="#collection">הכלים</a><a href="#about">אודות</a><a href="#care">שימוש ומשלוח</a><a href="#concept">הדמיית AI</a><a href="#order">הזמנה אישית</a>
+    </nav>
+    <div class="hd-act">
+      <a class="btn btn-mint wa mag" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer" aria-label="דברו איתי בווטסאפ"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span>דברו איתי בווטסאפ</span></a>
+      <button id="menuBtn" type="button" aria-expanded="false" aria-controls="mob" aria-label="פתיחת תפריט"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
+  </div>
+  <nav id="mob" aria-label="תפריט נייד">
+    <a href="#story">הסיפור</a><a href="#collection">הכלים</a><a href="#about">טרה קאלמה</a><a href="#care">שימוש ומשלוח</a><a href="#concept">הדמיית AI</a><a href="#order">הזמנה אישית</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section id="story" aria-label="הסיפור של Terra Calma">
+    <div class="st">
+      <canvas id="storyGL" aria-hidden="true"></canvas>
+      <div class="st-shade"></div>
+      <div class="wrap st-wrap">
+        <div class="chs" id="chs">
+          <div class="ch on hero-txt">
+            <p class="kick fade-up" style="transition-delay:.1s">כלי קרמיקה בעבודת יד · לבתים ולעסקים.</p>
+            <h1 id="heroTitle">שקט שאפשר להחזיק בידיים.</h1>
+            <p class="lead fade-up" style="transition-delay:.75s">כלי אוכל ונוי למטבח ולבית, מחימר בעבודת יד שנוצרו מתוך מקום נשימה, האטה וחיבור בין שקט בראש לרעש בידיים.</p>
+            <div class="ctas fade-up" style="transition-delay:.95s">
+              <a href="#collection" class="btn btn-mint mag">לצפייה בכלים<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M17 7 7 17M16 17H7V8"/></svg></a>
+              <a href="#order" class="btn btn-ghost mag">הזמנה בהתאמה אישית</a>
+            </div>
+            <div class="trust fade-up" style="transition-delay:1.15s" id="trust"></div>
+          </div>
+          <div class="ch"><span class="num">i.</span><p class="kick">אדמה</p><h2>חימר גולמי.</h2><p>מינימליזם אורגני, חימר גולמי וגלזורות טבעיות בגווני אדמה ומנטה פסטלי.</p><img class="ch-img" loading="lazy" src="assets/marble-plate.jpg" alt=""></div>
+          <div class="ch"><span class="num">ii.</span><p class="kick">ידיים</p><h2>נשימה, האטה.</h2><p>כלים שנוצרו מתוך מקום נשימה, האטה וחיבור בין שקט בראש לרעש בידיים.</p><img class="ch-img" loading="lazy" src="assets/round-dish.jpg" alt=""></div>
+          <div class="ch"><span class="num">iii.</span><p class="kick">אש</p><h2>גלזורות טבעיות.</h2><p>כל הכלים נשרפים בטמפרטורה גבוהה, עם גלזורות עמידות לשימוש בטוח ושטיפה במדיח.</p><img class="ch-img" loading="lazy" src="assets/oval-platter.jpg" alt=""></div>
+          <div class="ch"><span class="num">iv.</span><p class="kick">צורה</p><h2>100% עבודת יד.</h2><p>כל כלי יחיד ומיוחד במינו.</p><img class="ch-img" loading="lazy" src="assets/candle-holders.jpg" alt=""></div>
+          <div class="ch"><span class="num">v.</span><p class="kick">שורשים</p><h2>טרה קאלמה.</h2><p>אדמה רגועה, באיטלקית.</p><img class="ch-img" loading="lazy" src="assets/map-earth.jpg" alt=""></div>
+          <div class="ch"><span class="num">vi.</span><p class="kick">אחת ויחידה</p><h2>אף כלי לא חוזר על עצמו.</h2><p>הגוונים והצורות המשתנות הופכים כל יצירה לאחת ויחידה.</p><img class="ch-img" loading="lazy" src="assets/map-speckled.jpg" alt=""></div>
+          <div class="ch"><span class="num">vii.</span><p class="kick">לשולחן</p><h2>כלי אוכל ונוי למטבח ולבית.</h2><p>קולקציית הסטודיו · מהדורות קטנות.</p>
+            <div class="ctas" style="margin-top:26px"><a href="#collection" class="btn btn-mint mag">לצפייה בכלים</a><a class="btn btn-wa wa mag" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer">דברו איתי בווטסאפ</a></div>
+            <img class="ch-img" loading="lazy" src="assets/challah-plate.jpg" alt=""></div>
+        </div>
+      </div>
+      <nav class="rail" id="rail" aria-label="פרקי הסיפור"></nav>
+      <a class="cap off" id="cap" target="_blank" rel="noopener noreferrer"></a>
+      <div class="scroll-hint fade-up" style="transition-delay:1.4s">גללו לסיפור<i></i></div>
+    </div>
+  </section>
+
+  <div class="marq" aria-hidden="true"><div class="marq-in" id="marq"></div></div>
+
+  <section id="collection" class="solid">
+    <div class="wrap">
+      <div class="col-head">
+        <div class="rv-t"><p class="eyebrow">קולקציית הסטודיו · מהדורות קטנות.</p><h2 class="h2">כלי אוכל ונוי<br>זמינים להזמנה.</h2></div>
+        <div class="tabs" role="tablist" aria-label="סינון כלים לפי קטגוריה" id="tabs"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="about" class="solid">
+    <div class="wrap ab">
+      <div class="blobs rv-t">
+        <div class="ring2"></div>
+        <div class="blob b1"><div class="mask"><img class="par" data-s="-60" src="assets/map-earth.jpg" alt="יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגווני מרווה ואדמה." loading="lazy"></div></div>
+        <div class="blob b2"><div class="mask"><img class="par" data-s="50" src="assets/candle-holders.jpg" alt="זוג פמוטי קרמיקה פיסוליים בעבודת יד בגלזורת אבן אפורה מנוקדת וגלזורה תכולה." loading="lazy"></div></div>
+      </div>
+      <div>
+        <p class="eyebrow">אדמה רגועה · כלי קרמיקה בעבודת יד.</p>
+        <h2 class="h2">טרה קאלמה</h2>
+        <p class="story" id="storyText">אודות טרה קאלמה (אדמה רגועה באיטלקית) – נולדה מתוך מסע של שיקום והחלמה, שהחלה בשנת 2023. העבודה בחימר גולמי, גלזורות, ויצירת כלים שנוצרו מתוך מקום נשימה, האטה וחיבור בין שקט בראש לרעש בידיים. הגוונים והצורות המשתנות הופכים כל יצירה לאחת ויחידה.</p>
+        <div class="hand">
+          <div><b><span class="cnt" data-to="100">0</span>%</b><span>עבודת יד.</span></div>
+          <div><b><span class="cnt" data-to="2023" data-from="1990">2023</span></b><span>נולדה טרה קאלמה.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="care" class="solid">
+    <div class="wrap">
+      <div class="rv-t"><p class="eyebrow">שימוש, תחזוקה ואספקה.</p><h2 class="h2">מידע חשוב לפני ההזמנה.</h2></div>
+      <div class="care" id="careGrid"></div>
+    </div>
+  </section>
+
+  <section id="concept" class="solid" aria-label="הדמיית AI להזמנה אישית">
+    <div class="glowbg"></div>
+    <div class="wrap cc">
+      <div class="rv-t">
+        <span class="ai-badge"><i></i>הדמיית AI</span>
+        <h2 class="h2">תארו את הכלי שאתם חולמים עליו.</h2>
+        <p class="lead">כתבו במילים שלכם מה תרצו שניצור עבורכם — סוג הכלי, גוונים, גודל, כיתוב — וקבלו תמונת קונספט ראשונית לפני שמדברים על ההזמנה.</p>
+        <form id="aiForm" novalidate>
+          <div class="prompt">
+            <label for="aiPrompt" class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">תיאור הכלי</label>
+            <textarea id="aiPrompt" maxlength="400" rows="4" placeholder="למשל: סט של 4 צלחות הגשה בגלזורת מרווה עם שוליים בחום אדמה, לבית קפה…"></textarea>
+            <div class="prompt-row"><small id="aiCount">0/400</small><button class="btn btn-ink mag" type="submit" id="aiGo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>צרו הדמיה</button></div>
+          </div>
+          <div class="sugg" id="aiSugg"></div>
+          <p class="ai-note">ההדמיה נוצרת בבינה מלאכותית ונועדה להשראה בלבד. כל כלי נעשה בעבודת יד, ולכן הכלי שייווצר יהיה יחיד ומיוחד במינו.</p>
+        </form>
+      </div>
+      <div class="rv-t">
+        <div class="frame"><div class="ring3"></div><div class="fm" id="aiFrame">
+          <div class="empty" id="aiEmpty"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10c0 5 2.5 9 6 9s6-4 6-9H6Z"/><path d="M5 10h14"/><path d="M9 19h6"/></svg>ההדמיה שלכם תופיע כאן.</div></div>
+        </div></div>
+        <div class="res-act" id="aiAct"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order" class="solid">
+    <div class="orb"></div><div class="orb b"></div>
+    <div class="wrap or">
+      <div class="rv-t">
+        <p class="eyebrow">לבתים פרטיים, מסעדות ובתי קפה.</p>
+        <h2 class="h2">הזמנות אישיות ופרויקטים עסקיים.</h2>
+        <p class="lead">חולמים על סט צלחות בצבעוניות מסוימת, מתנה אישית בעבודת יד, או כלים ממותגים לבית הקפה והמסעדה שלכם? השאירו פרטים, או שלחו הודעה, ונעצב יחד את הסדרה המתאימה לכם.</p>
+        <div class="links">
+          <a class="lk ig" target="_blank" rel="noopener noreferrer"><span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>עקבו אחרי הסטודיו באינסטגרם</span><small>@terra_calma</small></a>
+          <a class="lk wa" data-msg="היי אודיה, אשמח לדבר על הזמנה מותאמת אישית מ-Terra Calma." target="_blank" rel="noopener noreferrer"><span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>ווטסאפ ישיר לסטודיו</span><small class="waDisp"></small></a>
+        </div>
+      </div>
+      <div class="form rv-t" id="formBox"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="ft-giant" aria-hidden="true">Terra Calma</div>
+  <div class="wrap ft">
+    <div><p class="brand" style="margin:0">Terra Calma</p><p style="margin:4px 0 0;font-size:15px">אדמה רגועה · כלי קרמיקה בעבודת יד.</p></div>
+    <nav aria-label="קישורי תחתית"><a href="#collection">הכלים</a><a href="#about">אודות</a><a href="#care">מידע חשוב</a><a class="ig" target="_blank" rel="noopener noreferrer">אינסטגרם</a><a class="wa waDisp" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma." target="_blank" rel="noopener noreferrer"></a></nav>
+  </div>
+</footer>
+
+<a id="fab" class="wa" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer" aria-label="שליחת הודעה בווטסאפ"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg></a>
+<div id="mbar"><a class="btn btn-wa wa" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>דברו איתי בווטסאפ</a><a class="btn btn-mint" href="#collection">לצפייה בכלים</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+{
+/* ================= DATA (from the original project) ================= */
+const WHATSAPP_NUMBER='972502662926',WHATSAPP_DISPLAY='050-2662926';
+const INSTAGRAM_URL='https://www.instagram.com/terra_calma?dmpr=MTJ5cm9zbG9qZGtiMA%3D%3D&utm_source=qr';
+const CATEGORIES=[{key:'all',label:'כל הכלים'},{key:'plates',label:'צלחות ומגשים'},{key:'bowls',label:'קערות וצלוחיות'},{key:'decor',label:'פריטים דקורטיביים'}];
+const PRODUCTS=[
+ {id:'challah-plate',name:'צלחת חלה "שבת שלום"',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'שמנת מנוקדת, בחריטת יד וגלזורה תכולה',dimensions:'קוטר כ-30 ס״מ.',price:180,image:'assets/challah-plate.jpg',px:.5,py:.62,alt:'צלחת חלה מקרמיקה בעבודת יד עם כיתוב שבת שלום בגלזורה תכולה ואיורי דגים על מפת פשתן לבנה.'},
+ {id:'marbled-stone-plate',name:'צלחת הגשה משוישת — אבן וחול',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'שיוש טבעי בגווני אבן, שמנת ופחם',dimensions:'קוטר כ-26 ס״מ.',price:150,image:'assets/marble-plate.jpg',px:.56,py:.5,alt:'צלחת הגשה עגולה מקרמיקה בעבודת יד עם שיוש טבעי בגווני אפור אבן, שמנת וחום עמוק.'},
+ {id:'oval-brown-platter',name:'מגש הגשה אובלי חום',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'גלזורה חומה, משוישת בגווני אדמה',dimensions:'אורך כ-32 ס״מ · רוחב כ-20 ס״מ.',price:160,image:'assets/oval-platter.jpg',px:.5,py:.55,alt:'מגש הגשה אובלי מקרמיקה בעבודת יד בגלזורה חומה עשירה ומשוישת.'},
+ {id:'marbled-round-dish',name:'צלוחית עגולה משוישת',category:'bowls',categoryLabel:'קערות וצלוחיות',clayNote:'גווני אדמה וחול, עם שקעים בצדדים',dimensions:'קוטר כ-14 ס״מ.',price:85,image:'assets/round-dish.jpg',px:.5,py:.68,alt:'צלוחית קרמיקה עגולה בעבודת יד בגלזורה חומה משוישת עם שני שקעים בשפה.'},
+ {id:'sculptural-candle-holders',name:'זוג פמוטים פיסוליים',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורת אבן מנוקדת ותכלת רך',dimensions:'זוג פמוטים לנרות · בעבודת יד.',price:145,image:'assets/candle-holders.jpg',px:.5,py:.28,alt:'זוג פמוטי קרמיקה פיסוליים בעבודת יד בגלזורת אבן אפורה מנוקדת וגלזורה תכולה.'},
+ {id:'israel-wall-earth',name:'תבליט קיר ארץ ישראל — אדמה ומרווה',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורת מרווה, חמרה וכחול עדין',dimensions:'גובה כ-26 ס״מ · כולל חור לתלייה.',price:140,image:'assets/map-earth.jpg',px:.5,py:.5,alt:'יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגווני ירוק מרווה, חמרה וכחול.'},
+ {id:'israel-wall-speckled',name:'תבליט קיר ארץ ישראל — מנוקד',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורה בהירה, מנוקדת בעבודת יד',dimensions:'גובה כ-26 ס״מ · כולל חור לתלייה.',price:140,image:'assets/map-speckled.jpg',px:.5,py:.5,alt:'יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגלזורה לבנה-תכולה מנוקדת.'}
+];
+const CARE=[
+ {t:'מתאים למדיח כלים',d:'כל הכלים נשרפים בטמפרטורה גבוהה, עם גלזורות עמידות לשימוש בטוח ושטיפה במדיח. מומלץ לשטוף ידני.',i:'<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11Z"/><path d="M9 14a3 3 0 0 0 3 3"/>'},
+ {t:'בטוח למיקרוגל',d:'החימר והגלזורות נטולים מתכות, ומאפשרים חימום נוח ובטוח במיקרוגל.',i:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h8v6H7z"/><path d="M18 9v.5M18 13v2"/>'},
+ {t:'איסוף עצמי מהסטודיו',d:'ניתן להגיע לאיסוף עצמי, בתיאום מראש בווטסאפ.',i:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>'},
+ {t:'משלוחים לכל הארץ',d:'אריזה מוקפדת ומרופדת, השומרת על כל כלי עד להגעה בטוחה הביתה או לעסק.',i:'<path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/>'}
+];
+const ORDER_TYPES=['סט כלים לבית','הזמנה עסקית למסעדה או בית קפה','מתנה אישית בעבודת יד','כלי בעיצוב ומידות מיוחדות'];
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wa=m=>`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(m)}`;
+const orderMsg=p=>`היי אודיה, אשמח להזמין את הכלי "${p.name}" (₪${p.price}) מהאתר של Terra Calma.`;
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const waIcon='<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>';
+const sm=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t)};
+const $=id=>document.getElementById(id);
+
+/* ================= static wiring ================= */
+document.querySelectorAll('.wa').forEach(a=>a.href=wa(a.dataset.msg));
+document.querySelectorAll('.waDisp').forEach(e=>e.textContent=WHATSAPP_DISPLAY);
+document.querySelectorAll('.ig').forEach(a=>a.href=INSTAGRAM_URL);
+const mb=$('menuBtn'),mob=$('mob');
+mb.onclick=()=>{const o=mob.classList.toggle('open');mb.setAttribute('aria-expanded',o);mb.setAttribute('aria-label',o?'סגירת תפריט':'פתיחת תפריט')};
+mob.querySelectorAll('a').forEach(a=>a.onclick=()=>{mob.classList.remove('open');mb.setAttribute('aria-expanded',false)});
+const ht=$('heroTitle');
+ht.innerHTML=ht.textContent.split(' ').map((w,i)=>`<span class="w"><span style="transition-delay:${.2+i*.13}s">${esc(w)}</span></span>`).join(' ');
+const chk='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg>';
+$('trust')&&($('trust').innerHTML=[CARE[0].t,CARE[1].t,CARE[3].t].map(t=>`<span>${chk}${esc(t)}</span>`).join(''));
+const mq=['חימר גולמי','גלזורות טבעיות','100% עבודת יד','כל כלי יחיד ומיוחד במינו','אדמה רגועה','מהדורות קטנות'];
+$('marq').innerHTML=[...mq,...mq,...mq,...mq].map(t=>`<span>${esc(t)}</span>`).join('');
+
+/* ================= catalog ================= */
+let cat='all';
+const tabs=$('tabs'),grid=$('grid');
+function renderTabs(){tabs.innerHTML=CATEGORIES.map(c=>`<button class="tab" role="tab" type="button" data-k="${c.key}" aria-selected="${c.key===cat}">${esc(c.label)}</button>`).join('')}
+function renderGrid(){
+  const list=cat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===cat);
+  grid.innerHTML=list.map((p,i)=>`<article class="card rv" style="transition-delay:${(i%3)*.12}s"><div class="card-in">
+    <div class="ph"><img src="${p.image}" alt="${esc(p.alt)}" loading="lazy" style="object-position:${p.px*100}% ${p.py*100}%"><span class="tag">${esc(p.categoryLabel)}</span><span class="shine"></span></div>
+    <div class="info"><p class="note">${esc(p.clayNote)}</p>
+      <div class="row"><h3>${esc(p.name)}</h3><span class="price">₪${p.price}</span></div>
+      <p class="dim">${esc(p.dimensions)}</p>
+      <a class="btn btn-mint" target="_blank" rel="noopener noreferrer" href="${wa(orderMsg(p))}">${waIcon}<span>להזמנה בווטסאפ</span></a>
+    </div></div></article>`).join('');
+  grid.querySelectorAll('.rv').forEach(observe);
+  grid.querySelectorAll('.card').forEach(tilt);
+}
+tabs.onclick=e=>{const b=e.target.closest('.tab');if(!b)return;cat=b.dataset.k;renderTabs();renderGrid()};
+function tilt(card){
+  if(RM||!FINE)return;
+  const inn=card.querySelector('.card-in');
+  card.onmousemove=e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;inn.style.transform=`rotateY(${x*12}deg) rotateX(${-y*12}deg)`};
+  card.onmouseleave=()=>inn.style.transform='';
+}
+
+/* ================= care ================= */
+$('careGrid').innerHTML=CARE.map((c,i)=>`<div class="ci rv-t" style="transition-delay:${i*.1}s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${c.i}</svg><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div>`).join('');
+
+/* ================= order form → WhatsApp ================= */
+const fb=$('formBox');
+let draft={name:'',contact:'',type:ORDER_TYPES[0],notes:''};
+function renderForm(err){
+  fb.innerHTML=`<form id="of" novalidate>
+    <div class="fr">
+      <label class="fl"><span>שם מלא</span><input id="f-name" type="text" autocomplete="name" placeholder="למשל: נועה כהן" value="${esc(draft.name)}"></label>
+      <label class="fl"><span>טלפון או אימייל לחזרה</span><input id="f-contact" type="text" autocomplete="tel" placeholder="050-0000000" value="${esc(draft.contact)}"></label>
+    </div>
+    <label class="fl"><span>סוג ההזמנה</span><select id="f-type">${ORDER_TYPES.map(t=>`<option${t===draft.type?' selected':''}>${esc(t)}</option>`).join('')}</select></label>
+    <label class="fl"><span>מה תרצו שניצור עבורכם?</span><textarea id="f-notes" rows="4" placeholder="ספרו לנו על סוג הכלים, כמויות משוערות, גוונים אהובים או תאריך יעד...">${esc(draft.notes)}</textarea></label>
+    <p class="err" role="alert">${err?esc(err):''}</p>
+    <button class="btn btn-mint mag" type="submit">הכנת פנייה להזמנה אישית</button>
+  </form>`;
+  $('of').onsubmit=e=>{
+    e.preventDefault();
+    draft={name:$('f-name').value.trim(),contact:$('f-contact').value.trim(),type:$('f-type').value,notes:$('f-notes').value.trim()};
+    if(!draft.name||!draft.contact||!draft.notes)return renderForm('אנא מלאו שם, פרטי התקשרות ותיאור קצר של ההזמנה הרצויה.');
+    renderDone();
+  };
+  bindMag(fb);
+}
+function renderDone(){
+  const d=draft,url=wa(`היי אודיה, שמי ${d.name} (${d.contact}).\nאשמח לברר לגבי ${d.type}:\n${d.notes}`);
+  fb.innerHTML=`<div class="done"><div class="chk"><svg class="ico" style="width:26px;height:26px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m5 12 5 5 9-10"/></svg></div>
+    <h3>הפרטים מוכנים לשליחה, ${esc(d.name)}</h3>
+    <p style="color:var(--soft);margin:0">כדי שנוכל להתחיל מיד בתיאום ההזמנה (${esc(d.type)}), לחצו על הכפתור כדי לפתוח שיחה בווטסאפ עם כל הפרטים שמילאתם מוכנים בהודעה.</p>
+    <div class="sum"><b>איש קשר:</b> ${esc(d.contact)}<br><b>תיאור הבקשה:</b> ${esc(d.notes)}</div>
+    <div class="ctas"><a class="btn btn-wa" href="${url}" target="_blank" rel="noopener noreferrer">${waIcon}<span>שליחת ההודעה בווטסאפ</span></a>
+    <button class="btn btn-ghost" type="button" id="editBtn">עריכה או פנייה חדשה</button></div></div>`;
+  $('editBtn').onclick=()=>renderForm();
+}
+
+/* ================= reveal / magnetic / cursor ================= */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+function observe(el){RM?el.classList.add('in'):io.observe(el)}
+function bindMag(root){
+  if(RM||!FINE)return;
+  root.querySelectorAll('.mag').forEach(b=>{
+    b.onmousemove=e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.35}px)`};
+    b.onmouseleave=()=>{b.style.transition='transform .6s var(--ease)';b.style.transform='';setTimeout(()=>b.style.transition='',600)};
+  });
+}
+renderTabs();renderGrid();renderForm();
+document.querySelectorAll('.rv-t').forEach(observe);
+bindMag(document);
+const cur=$('cur');let cx=-100,cy=-100,tx=-100,ty=-100;
+if(FINE&&!RM){
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
+  document.addEventListener('pointerover',e=>cur.classList.toggle('big',!!e.target.closest('a,button,.card,#stage,select,input,textarea')));
+  const cl=()=>{cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cur.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(cl)};cl();
+}else cur.remove();
+
+/* story words + counters */
+const storyP=$('storyText');
+storyP.innerHTML=storyP.textContent.split(' ').map(w=>`<span class="wd">${esc(w)}</span>`).join(' ');
+const words=[...storyP.querySelectorAll('.wd')];
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);
+  const el=e.target,to=+el.dataset.to,from=+(el.dataset.from||0),t0=performance.now();
+  if(RM){el.textContent=to;return}
+  const f=now=>{const k=Math.min(1,(now-t0)/1800),v=from+(to-from)*(1-Math.pow(1-k,4));el.textContent=Math.round(v);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}),{threshold:.6});
+document.querySelectorAll('.cnt').forEach(c=>{c.textContent=c.dataset.from||0;cio.observe(c)});
+
+/* ================= STORY (WebGL, real photos) ================= */
+const story=$('story'),chEls=[...document.querySelectorAll('.ch')],rail=$('rail'),cap=$('cap'),hint=document.querySelector('.st .scroll-hint');
+const CH=[
+ {k:'פתיח',img:null,pid:-1,z:[1.25,1.05],f:[[.5,.5],[.5,.5]]},
+ {k:'אדמה',img:'assets/marble-plate.jpg',pid:1,z:[2.8,1.12],f:[[.36,.42],[.56,.5]]},
+ {k:'ידיים',img:'assets/round-dish.jpg',pid:3,z:[2.6,1.15],f:[[.5,.56],[.5,.68]]},
+ {k:'אש',img:'assets/oval-platter.jpg',pid:2,z:[2.1,1.08],f:[[.42,.42],[.5,.55]]},
+ {k:'צורה',img:'assets/candle-holders.jpg',pid:4,z:[2,1.05],f:[[.7,.3],[.5,.3]]},
+ {k:'שורשים',img:'assets/map-earth.jpg',pid:5,z:[1.9,1.1],f:[[.5,.35],[.5,.5]]},
+ {k:'אחת ויחידה',img:'assets/map-speckled.jpg',pid:6,z:[1.05,1.7],f:[[.5,.5],[.5,.42]]},
+ {k:'לשולחן',img:'assets/challah-plate.jpg',pid:0,z:[1.8,1.0],f:[[.55,.5],[.5,.62]]}
+];
+const NC=CH.length;
+rail.innerHTML=CH.map((c,i)=>`<button type="button" data-i="${i}"><i></i>${esc(c.k)}</button>`).join('');
+const railBtns=[...rail.children];
+const storyScrollTo=i=>{const span=story.offsetHeight-innerHeight;scrollTo({top:story.offsetTop+span*(i/(NC-1))/1.06+2,behavior:RM?'auto':'smooth'})};
+rail.onclick=e=>{const b=e.target.closest('button');if(b)storyScrollTo(+b.dataset.i)};
+let chActive=-1;
+function setChapter(i){
+  if(i===chActive)return;chActive=i;
+  chEls.forEach((c,k)=>c.classList.toggle('on',k===i));
+  railBtns.forEach((b,k)=>b.classList.toggle('on',k===i));
+  const c=CH[i];
+  if(c.pid<0){cap.classList.add('off');return}
+  const p=PRODUCTS[c.pid];
+  cap.href=wa(orderMsg(p));
+  cap.innerHTML=`<span>${esc(p.name)}</span><span class="pr">₪${p.price}</span><span class="go">להזמנה</span>`;
+  cap.classList.remove('off');
+}
+setChapter(0);
+const SP={pos:0};
+let has3D=false;
+try{has3D=!!window.THREE&&!!(document.createElement('canvas').getContext('webgl'))}catch(e){}
+if(!has3D)document.documentElement.classList.add('no3d');
+let storyApi=null;
+
+function initStory(){
+  const T=THREE,cv=$('storyGL');
+  const renderer=new T.WebGLRenderer({canvas:cv,antialias:false});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  const scene=new T.Scene(),cam=new T.OrthographicCamera(-1,1,1,-1,0,1);
+  // clay on the wheel, seen from above (procedural, not a photo)
+  const clay=(()=>{const N=640,c=document.createElement('canvas');c.width=c.height=N;const g=c.getContext('2d'),im=g.createImageData(N,N),d=im.data;
+    const h=(x,y)=>{const s=Math.sin(x*127.1+y*311.7)*43758.5453;return s-Math.floor(s)};
+    const vn=(x,y)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf),a=h(xi,yi),b=h(xi+1,yi),cc=h(xi,yi+1),dd=h(xi+1,yi+1);return a+(b-a)*u+(cc-a)*v+(a-b-cc+dd)*u*v};
+    const fb=(x,y)=>{let s=0,a=.5,f=1;for(let o=0;o<4;o++){s+=a*vn(x*f,y*f);a*=.5;f*=2}return s};
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=x/N-.5,dy=y/N-.5,r=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
+      const n=fb(x/N*6,y/N*6),n2=fb(x/N*22,y/N*22),rings=.5+.5*Math.sin(r*170+n*9+Math.sin(an*2+n*4)*1.4);
+      let L=.4+.3*n+.08*n2+.06*rings*(r<.42?1:.3);
+      const wet=Math.max(0,1-Math.abs(r-.2)*9)*.25;L+=wet*rings;
+      if(r>.44)L*=.55+.2*fb(an*4,r*20);
+      const sp=h(x,y)>.992?-.12:0;
+      const i=(y*N+x)*4;d[i]=Math.min(255,(L+sp)*255*.95);d[i+1]=Math.min(255,(L+sp)*255*.68);d[i+2]=Math.min(255,(L+sp)*255*.52);d[i+3]=255}
+    g.putImageData(im,0,0);const t=new T.CanvasTexture(c);t.minFilter=T.LinearFilter;t.generateMipmaps=false;return t})();
+  const texs=CH.map(c=>c.img?null:clay),sizes=CH.map(()=>new T.Vector2(1,1));
+  const loader=new T.TextureLoader();
+  CH.forEach((c,i)=>{if(!c.img)return;loader.load(c.img,t=>{t.minFilter=T.LinearFilter;t.generateMipmaps=false;texs[i]=t;sizes[i].set(t.image.width,t.image.height)})});
+  const U={tA:{value:clay},tB:{value:clay},sA:{value:new T.Vector2(1,1)},sB:{value:new T.Vector2(1,1)},res:{value:new T.Vector2(1,1)},
+    mixv:{value:0},time:{value:0},glow:{value:0},zA:{value:1},zB:{value:1},fA:{value:new T.Vector2(.5,.5)},fB:{value:new T.Vector2(.5,.5)},
+    spA:{value:0},spB:{value:0},mouse:{value:new T.Vector2()},readyA:{value:1},readyB:{value:1}};
+  const frag=`
+precision highp float;
+uniform sampler2D tA,tB;uniform vec2 sA,sB,res,fA,fB,mouse;uniform float mixv,time,glow,zA,zB,spA,spB,readyA,readyB;
+varying vec2 vUv;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
+float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*noise(p);p*=2.02;a*=.5;}return s;}
+vec2 cover(vec2 uv,vec2 size,float z,vec2 foc,float sp){
+  float rs=res.x/res.y,ri=size.x/size.y;
+  vec2 s=rs>ri?vec2(1.,ri/rs):vec2(rs/ri,1.);s/=z;
+  vec2 c=clamp(foc,s*.5,1.-s*.5);
+  vec2 p=(uv-.5)*vec2(rs,1.);float cs=cos(sp),sn=sin(sp);p=mat2(cs,-sn,sn,cs)*p;p/=vec2(rs,1.);
+  return c+p*s;}
+vec3 sampleT(sampler2D t,vec2 uv,float ready){vec3 c=texture2D(t,uv).rgb;return mix(vec3(.11,.09,.07),c,ready);}
+void main(){
+  vec2 uv=vUv+mouse*.008;
+  float n=fbm(vUv*vec2(res.x/res.y,1.)*2.6+vec2(0.,time*.04));
+  float th=mixv*1.3-.15;
+  float m=smoothstep(th+.09,th-.09,n);
+  vec2 d=vec2(n-.5,fbm(vUv*3.1+7.)-.5)*.12;
+  vec3 a=sampleT(tA,cover(uv+d*mixv,sA,zA,fA,spA),readyA);
+  vec3 b=sampleT(tB,cover(uv-d*(1.-mixv),sB,zB,fB,spB),readyB);
+  vec3 col=mix(a,b,m);
+  float rim=1.-abs(m*2.-1.);rim=pow(rim,2.)*step(.001,mixv)*step(mixv,.999);
+  col=mix(col,vec3(.42,.28,.2),rim*.75);
+  // kiln
+  vec2 q=vUv-vec2(.5,.05);
+  float heat=fbm(vec2(vUv.x*4.,vUv.y*3.-time*.5));
+  col=mix(col,col*vec3(1.12,.86,.7)+vec3(.32,.1,.02)*heat*smoothstep(1.,.0,length(q)),glow);
+  vec2 g=vec2(vUv.x*res.x/res.y*26.,vUv.y*12.-time*1.4);vec2 id=floor(g),f=fract(g)-.5;float hs=hash(id);vec2 jt=vec2(hash(id+3.1),hash(id+7.7))-.5;
+  float spark=step(.93,hs)*smoothstep(.09,0.,length(f+jt*.7+vec2(sin(time*2.+hs*6.)*.15,0.)));
+  col+=glow*spark*vec3(1.,.62,.3)*1.6;
+  col*=mix(1.,smoothstep(1.25,.3,length((vUv-.5)*vec2(1.2,1.))),.5);
+  col+=(hash(vUv*res+time)-.5)*.05;
+  gl_FragColor=vec4(col,1.);
+}`;
+  const mat=new T.ShaderMaterial({uniforms:U,vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',fragmentShader:frag});
+  scene.add(new T.Mesh(new T.PlaneGeometry(2,2),mat));
+  let W=0,H=0,visible=true,mx=0,my=0,dead=false;
+  function resize(){W=cv.clientWidth;H=cv.clientHeight;renderer.setSize(W,H,false);U.res.value.set(W,H)}
+  addEventListener('resize',resize);resize();
+  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+  const lerp=(a,b,t)=>a+(b-a)*t;
+  let sm_pos=0;
+  function setCh(slot,i,pos){
+    const c=CH[i],t=Math.min(1,Math.max(0,(pos-i+.6)/1.6)),e=t*t*(3-2*t);
+    U['t'+slot].value=texs[i]||clay;U['ready'+slot].value=texs[i]?1:0;
+    U['s'+slot].value.copy(texs[i]===clay?new T.Vector2(1,1):sizes[i]);
+    U['z'+slot].value=lerp(c.z[0],c.z[1],e);
+    U['f'+slot].value.set(lerp(c.f[0][0],c.f[1][0],e),1-lerp(c.f[0][1],c.f[1][1],e));
+  }
+  function frame(now){
+    if(dead)return;requestAnimationFrame(frame);if(!visible)return;
+    try{
+      sm_pos+=(SP.pos-sm_pos)*(RM?1:.12);
+      const pos=sm_pos,A=Math.min(NC-1,Math.floor(pos)),B=Math.min(NC-1,A+1),fr=pos-A;
+      setCh('A',A,pos);setCh('B',B,pos);
+      U.mixv.value=B===A?0:sm(.45,1,fr);
+      const tm=now/1000;U.time.value=tm;
+      U.spA.value=A===0?tm*.35:0;U.spB.value=B===0?tm*.35:0;
+      U.glow.value=sm(2.55,3,pos)*(1-sm(3.35,3.75,pos));
+      U.mouse.value.x+=(mx-U.mouse.value.x)*.05;U.mouse.value.y+=(-my-U.mouse.value.y)*.05;
+      renderer.render(scene,cam);
+    }catch(err){dead=true;console.error(err);document.documentElement.classList.add('no3d')}
+  }
+  requestAnimationFrame(frame);
+  return{setVisible(v){visible=v}};
+}
+if(has3D){try{storyApi=initStory()}catch(err){console.error(err);document.documentElement.classList.add('no3d')}}
+
+/* ================= AI concept ================= */
+const AI_ENDPOINT='/api/concept';
+const aiP=$('aiPrompt'),aiCount=$('aiCount'),aiFrame=$('aiFrame'),aiAct=$('aiAct'),aiGo=$('aiGo');
+const SUGG=['צלחת הגשה משוישת בגווני אבן וחול','סט קערות בגלזורת מרווה','צלחת חלה עם כיתוב בחריטת יד','כלים ממותגים לבית קפה','פמוטים פיסוליים בתכלת רך','מגש אובלי בגלזורה חומה'];
+$('aiSugg').innerHTML=SUGG.map(t=>`<button class="chip" type="button">${esc(t)}</button>`).join('');
+$('aiSugg').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;const cur=aiP.value.trim();aiP.value=(cur?cur+', ':'')+b.textContent;aiP.dispatchEvent(new Event('input'));aiP.focus()};
+aiP.oninput=()=>aiCount.textContent=`${aiP.value.length}/400`;
+const STAGES=['מכינים את החימר…','על האובניים…','בתנור…','מזגגים…'];
+let aiBusy=false,aiTimer=0;
+const conceptMsg=p=>`היי אודיה, יצרתי באתר של Terra Calma הדמיה לכלי בהתאמה אישית ואשמח לשמוע אם אפשר ליצור אותו:\n${p}`;
+function aiState(kind,data){
+  clearInterval(aiTimer);
+  [...aiFrame.querySelectorAll('.empty,.busy,.fail')].forEach(n=>n.remove());
+  if(kind==='busy'){
+    aiFrame.querySelector('img')?.classList.remove('on');
+    aiFrame.insertAdjacentHTML('beforeend',`<div class="busy" role="status"><div class="ld"><svg viewBox="0 0 84 84" width="72" height="72"><circle cx="42" cy="42" r="34"/></svg><b id="aiStage">${STAGES[0]}</b></div></div>`);
+    let i=0;aiTimer=setInterval(()=>{const el=$('aiStage');if(el)el.textContent=STAGES[++i%STAGES.length]},2200);
+    aiAct.innerHTML='';
+  }else if(kind==='fail'){
+    aiFrame.insertAdjacentHTML('beforeend',`<div class="fail" role="alert"><div>${esc(data)}</div></div>`);
+    aiAct.innerHTML=`<a class="btn btn-wa" target="_blank" rel="noopener noreferrer" href="${wa(conceptMsg(aiP.value.trim()))}">${waIcon}<span>שליחת התיאור בווטסאפ</span></a>`;
+  }else if(kind==='done'){
+    let img=aiFrame.querySelector('img');
+    if(!img){img=document.createElement('img');aiFrame.prepend(img)}
+    img.alt=`הדמיית AI: ${data.prompt}`;img.classList.remove('on');
+    img.onload=()=>requestAnimationFrame(()=>img.classList.add('on'));img.src=data.src;
+    aiAct.innerHTML=`<a class="btn btn-wa" target="_blank" rel="noopener noreferrer" href="${wa(conceptMsg(data.prompt))}">${waIcon}<span>שליחת הרעיון בווטסאפ</span></a>
+      <a class="btn btn-ghost" href="${data.src}" download="terra-calma-concept.png">הורדת התמונה</a>
+      <button class="btn btn-ghost" type="button" id="aiAgain">הדמיה נוספת</button>`;
+    $('aiAgain').onclick=()=>$('aiForm').requestSubmit();
+  }
+}
+$('aiForm').onsubmit=async e=>{
+  e.preventDefault();
+  const prompt=aiP.value.trim();
+  if(aiBusy)return;
+  if(prompt.length<4){aiState('fail','כתבו כמה מילים על הכלי שתרצו לראות.');aiAct.innerHTML='';aiP.focus();return}
+  aiBusy=true;aiGo.disabled=true;aiState('busy');
+  try{
+    const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),60000);
+    const r=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt}),signal:ctl.signal});
+    clearTimeout(to);
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.image)throw new Error(j.error||'no image');
+    aiState('done',{src:`data:${j.mimeType||'image/png'};base64,${j.image}`,prompt});
+  }catch(err){
+    aiState('fail',typeof err?.message==='string'&&/[֐-׿]/.test(err.message)?err.message:'ההדמיה לא זמינה כרגע. אפשר לשלוח את התיאור ישירות בווטסאפ, ונעצב יחד את הכלי.');
+  }finally{aiBusy=false;aiGo.disabled=false}
+};
+
+/* ================= scroll driver ================= */
+const bar=$('bar'),hdr=$('hdr'),about=$('about'),mbar=$('mbar'),order=$('order'),marq=$('marq');
+const pars=[...document.querySelectorAll('.par')];
+let lastY=scrollY,vel=0,ticking=false;
+function onScroll(){
+  ticking=false;
+  const y=scrollY,vh=innerHeight,max=document.documentElement.scrollHeight-vh;
+  vel+=(y-lastY);
+  hdr.classList.toggle('hide',y>lastY&&y>vh*.9&&!mob.classList.contains('open'));
+  lastY=y;
+  bar.style.transform=`scaleX(${max>0?y/max:0})`;
+  // story
+  const r=story.getBoundingClientRect(),span=r.height-vh;
+  const q=span>0?Math.min(1,Math.max(0,-r.top/span)):0;
+  SP.pos=Math.min(NC-1,q*(NC-1)*1.06);
+  setChapter(Math.min(NC-1,Math.floor(SP.pos+.4)));
+  hint.classList.toggle('gone',y>40);
+  if(storyApi)storyApi.setVisible(r.bottom>0&&r.top<vh);
+  // about
+  const ar=about.getBoundingClientRect();
+  const aq=Math.min(1,Math.max(0,(vh*.85-ar.top)/(ar.height*.8)));
+  const n=Math.round(aq*words.length);
+  words.forEach((w,i)=>w.classList.toggle('lit',RM||i<n));
+  if(!RM)pars.forEach(im=>im.style.transform=`translateY(${(aq-.5)*+im.dataset.s}px)`);
+  // mobile bar
+  const o=order.getBoundingClientRect();
+  mbar.classList.toggle('on',y>vh*.8&&o.top>vh*.6);
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+addEventListener('resize',onScroll);
+onScroll();
+
+/* marquee driven by scroll velocity */
+let mpos=0;
+(function mloop(){
+  vel*=.9;const half=marq.scrollWidth/2||1;
+  mpos=(mpos+(RM?0:.7+Math.min(14,Math.abs(vel)*.12)))%half;
+  const sk=RM?0:Math.max(-12,Math.min(12,vel*.05));
+  marq.style.transform=`translateX(${mpos}px) skewX(${sk}deg)`;
+  requestAnimationFrame(mloop);
+})();
+
+/* loader out */
+function reveal(){
+  const L=$('loader');if(!L||L.classList.contains('out'))return;
+  L.classList.add('out');document.body.classList.remove('lock');
+  document.documentElement.classList.add('ready');
+  setTimeout(()=>L.remove(),1200);
+}
+if(document.readyState==='complete')setTimeout(reveal,350);else addEventListener('load',()=>setTimeout(reveal,350));
+setTimeout(reveal,3500);
+}
+</script>
+</body>
+</html>
