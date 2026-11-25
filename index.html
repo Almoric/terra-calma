@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400&family=Heebo:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;1,300&family=Heebo:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 /*
 VOICE: שקט, אורגני, איטי — ואז אש. נשימה ליד האובניים, חום של תנור.
@@ -29,7 +29,6 @@ LAYOUT: במה קבועה להירו ולתהליך, טבעת מוצרים נע�
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.6 var(--fb);overflow-x:clip;-webkit-font-smoothing:antialiased}
-body.lock{overflow:hidden}
 ::selection{background:var(--mint);color:var(--mint-deep)}
 h1,h2,h3{font-family:var(--fh);font-weight:300;margin:0;text-wrap:balance}
 a{color:inherit}
@@ -47,18 +46,8 @@ img{display:block;max-width:100%}
 .h2{font-size:clamp(34px,5vw,60px);line-height:1.04}
 
 /* grain */
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:95;opacity:.07;mix-blend-mode:multiply;
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:95;opacity:.045;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-
-/* loader */
-#loader{position:fixed;inset:0;z-index:100;background:var(--canvas);display:grid;place-items:center;transition:clip-path 1.1s var(--ease);clip-path:inset(0 0 0 0)}
-#loader.out{clip-path:inset(0 0 100% 0)}
-.ld{display:flex;flex-direction:column;align-items:center;gap:18px}
-.ld svg{width:84px;height:84px;animation:spin 1.6s linear infinite}
-.ld circle{fill:none;stroke:var(--clay);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:60 200;animation:dash 1.6s var(--ease) infinite}
-.ld .brand{font-size:30px;opacity:.85}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes dash{50%{stroke-dasharray:170 200}}
 
 /* cursor */
 #cur{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid var(--earth);pointer-events:none;z-index:96;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .3s,border-color .3s;display:none}
@@ -69,7 +58,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:95;opa
 
 /* header */
 header{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,box-shadow .4s,transform .5s var(--ease)}
-header.solid{background:rgba(250,248,245,.86);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+header.solid{background:rgba(250,248,245,.96);box-shadow:0 1px 0 var(--line)}
 header.hide{transform:translateY(-100%)}
 .hd{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
 .hd .brand{font-size:29px;text-decoration:none}
@@ -83,15 +72,6 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 @media(max-width:900px){nav.main{display:none}#menuBtn{display:inline-grid;place-items:center}.hd .btn span{display:none}.hd .btn{padding:0;width:46px;min-height:46px}
   #mob.open{display:flex;flex-direction:column;padding:8px max(5vw,18px) 18px;background:rgba(250,248,245,.97);border-bottom:1px solid var(--line)}
   #mob a{min-height:52px;display:flex;align-items:center;font:300 24px var(--fh);text-decoration:none;border-bottom:1px solid var(--line)}}
-
-/* stage */
-.stage-bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 60% at 30% 62%,#fff 0%,var(--cream) 45%,var(--sand) 100%);overflow:hidden}
-.kiln{position:absolute;inset:0;opacity:var(--glow);background:radial-gradient(ellipse 55% 55% at 28% 62%,rgba(255,170,90,.75),rgba(196,82,34,.45) 42%,rgba(60,24,10,.2) 72%,transparent 90%)}
-.giant{position:absolute;left:0;right:0;bottom:4vh;text-align:center;direction:ltr;font:italic 300 clamp(90px,20vw,330px)/.85 var(--fbrand);color:transparent;-webkit-text-stroke:1px rgba(109,92,78,.28);white-space:nowrap;will-change:transform,opacity;user-select:none}
-#stage{position:fixed;inset:0;z-index:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
-#stage.drag{cursor:grabbing}
-.over{position:relative;z-index:2;pointer-events:none}
-.over a,.over button,.over .chips{pointer-events:auto}
 
 /* hero */
 #hero{min-height:100svh;display:flex;align-items:center}
@@ -113,38 +93,17 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 @keyframes drip{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
 .hero-fallback{display:none}
 
-/* process */
-#process{height:560vh;position:relative}
-.sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center}
-.sticky .wrap{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}
-.steps{position:relative;display:grid}
-.step{grid-area:1/1;opacity:0;pointer-events:none;transform:translateY(34px);filter:blur(8px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s}
-.step.on{opacity:1;transform:none;filter:none;pointer-events:auto}
-.step .num{font:italic 300 clamp(70px,9vw,130px)/.9 var(--fbrand);color:var(--clay);opacity:.6;display:block;margin-bottom:.12em;transition:color .6s}
-.hot .step .num{color:var(--ember);opacity:.95}
-.step h2{font-size:clamp(38px,5vw,66px);line-height:1.02}
-.step p{color:var(--soft);font-size:18.5px;max-width:25em;margin:.8em 0 0}
-.dots{display:flex;gap:10px;margin-bottom:26px}
-.dots i{width:40px;height:3px;border-radius:3px;background:rgba(109,92,78,.2);overflow:hidden;position:relative}
-.dots i b{position:absolute;inset:0;background:var(--earth);transform:scaleX(0);transform-origin:right}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.chip{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #D8CFC3;background:rgba(250,248,245,.85);font:400 15px var(--fh);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,border-color .2s,transform .3s var(--ease)}
-.chip:hover{transform:translateY(-2px)}
-.chip[aria-pressed=true]{background:var(--ink);color:var(--canvas);border-color:var(--ink)}
-.chip .sw{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
-.chip-lbl{font-size:14px;color:var(--stone);margin:18px 0 0}
-.drag-hint{font-size:14px;color:var(--stone);margin-top:14px;display:flex;align-items:center;gap:8px}
-
 
 /* story */
 #story{height:1000vh;position:relative;background:#1d1713}
+.st{background:radial-gradient(circle at 50% 50%,#8a6650 0%,#5e4434 42%,#2a1f19 75%)}
 .st{position:sticky;top:0;height:100svh;overflow:hidden;color:var(--canvas)}
 #storyGL{position:absolute;inset:0;width:100%;height:100%;display:block}
 .st-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(270deg,rgba(24,18,14,.84) 0%,rgba(24,18,14,.5) 36%,rgba(24,18,14,0) 64%),linear-gradient(0deg,rgba(24,18,14,.5),transparent 32%)}
 .st-wrap{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding-top:60px}
 .chs{display:grid;max-width:580px;width:100%}
-.ch{grid-area:1/1;align-self:center;opacity:0;transform:translateY(44px);filter:blur(10px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s;pointer-events:none}
-.ch.on{opacity:1;transform:none;filter:none;pointer-events:auto}
+.ch{grid-area:1/1;align-self:center;opacity:0;transform:translateY(44px);transition:opacity .9s var(--ease),transform .9s var(--ease);pointer-events:none;will-change:opacity,transform}
+.ch.on{opacity:1;transform:none;pointer-events:auto}
 .ch .num{font:italic 300 clamp(70px,9vw,128px)/.9 var(--fbrand);color:var(--ember);display:block}
 .ch .kick{font:400 15px var(--fh);color:#e3c7ad;margin:.4em 0 .5em}
 .ch h1{font-size:clamp(46px,6.6vw,94px);line-height:1;font-weight:200;letter-spacing:-.015em}
@@ -159,7 +118,7 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 .rail button i{width:20px;height:1px;background:currentColor;transition:width .5s var(--ease),background .3s}
 .rail button:hover{color:rgba(250,248,245,.85)}
 .rail button.on{color:var(--canvas)}.rail button.on i{width:48px;background:var(--ember)}
-.cap{position:absolute;left:max(5vw,18px);bottom:28px;z-index:3;display:flex;gap:12px;align-items:center;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(250,248,245,.13);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(250,248,245,.22);color:var(--canvas);text-decoration:none;font-size:14.5px;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.cap{position:absolute;left:max(5vw,18px);bottom:28px;z-index:3;display:flex;gap:12px;align-items:center;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(29,23,19,.72);border:1px solid rgba(250,248,245,.2);color:var(--canvas);text-decoration:none;font-size:14.5px;transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .cap.off{opacity:0;transform:translateY(14px);pointer-events:none}
 .cap .pr{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
 .cap .go{background:#25D366;color:#0b3d1f;border-radius:999px;padding:8px 14px;font:500 14px var(--fh);white-space:nowrap}
@@ -181,32 +140,13 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 .no3d .ch{grid-area:auto;opacity:1;transform:none;filter:none;pointer-events:auto}
 .no3d .ch-img{display:block;width:100%;max-height:72vh;object-fit:cover;border-radius:30px;margin-top:26px}
 
+#collection,#about,#care,#concept,#order{content-visibility:auto;contain-intrinsic-size:auto 900px}
 /* solid sections cover the stage */
 .solid{position:relative;z-index:3;background:var(--canvas)}
 .marq{position:relative;z-index:3;background:var(--ink);color:var(--canvas);overflow:hidden;padding:24px 0;border-radius:44px 44px 0 0;margin-top:-44px}
 .marq-in{display:flex;width:max-content;will-change:transform}
 .marq span{font:200 clamp(26px,3.4vw,46px) var(--fh);white-space:nowrap;padding-inline:30px;display:flex;align-items:center;gap:60px}
 .marq span::after{content:"";width:13px;height:13px;border-radius:50% 40% 55% 45%;background:var(--mint)}
-
-/* showcase ring */
-#showcase{height:480vh;background:var(--mint-deep);color:var(--canvas)}
-#showcase .sticky{overflow:hidden}
-#ring{position:absolute;inset:0;width:100%;height:100%;display:block}
-.sc-glow{position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 32% 50%,rgba(203,227,211,.16),transparent 70%)}
-.sc-panel{position:relative;z-index:2;max-width:440px;background:rgba(20,40,29,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(203,227,211,.14);border-radius:30px;padding:30px}
-.sc-panel .eyebrow{color:#a9c7b4}
-.sc-count{font:italic 300 22px var(--fbrand);color:#a9c7b4;margin:22px 0 6px;direction:ltr;text-align:right}
-.sc-info{transition:opacity .45s var(--ease),transform .45s var(--ease)}
-.sc-info.swap{opacity:0;transform:translateY(18px)}
-.sc-info .note{font-size:15px;color:#a9c7b4;margin:0}
-.sc-info h3{font-size:clamp(30px,3.4vw,44px);line-height:1.1;margin:.25em 0 .2em;font-weight:300}
-.sc-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-.sc-price{font:300 clamp(34px,3.6vw,48px) var(--fh);font-variant-numeric:tabular-nums;white-space:nowrap}
-.sc-dim{font-size:15px;color:#c7d8cd}
-.sc-bar{display:flex;gap:6px;margin-top:28px}
-.sc-bar i{flex:1;height:3px;border-radius:3px;background:rgba(203,227,211,.18);transition:background .4s}
-.sc-bar i.on{background:var(--mint)}
-.sc-hint{position:absolute;bottom:26px;left:max(5vw,18px);font-size:13px;color:#a9c7b4;z-index:2}
 
 /* catalog */
 #collection{padding:clamp(70px,10vw,140px) 0}
@@ -223,7 +163,7 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 .ph{position:relative;aspect-ratio:10/11;overflow:hidden;background:#EFEAE2}
 .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:transform 1.8s var(--ease)}
 .card:hover .ph img{transform:scale(1.04)}
-.ph .tag{position:absolute;top:14px;right:14px;background:rgba(250,248,245,.9);backdrop-filter:blur(6px);padding:4px 12px;border-radius:999px;font-size:13px;color:var(--soft)}
+.ph .tag{position:absolute;top:14px;right:14px;background:rgba(250,248,245,.94);padding:4px 12px;border-radius:999px;font-size:13px;color:var(--soft)}
 .ph .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(110%);transition:transform 1.1s var(--ease);pointer-events:none}
 .card:hover .shine{transform:translateX(-110%)}
 .info{padding:22px;display:flex;flex-direction:column;flex:1}
@@ -249,8 +189,8 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 .blob img{width:100%;height:120%;object-fit:cover;will-change:transform}
 .b1{inset:0 0 14% 18%}
 .b2{width:46%;aspect-ratio:3/4;left:0;bottom:0}
-.b2 .mask{border-radius:55% 45% 50% 50%/45% 55% 45% 55%;animation-duration:11s;animation-direction:reverse;border:6px solid var(--cream)}
-.ring2{position:absolute;inset:-4% -2% 10% 14%;border:1px solid rgba(109,92,78,.35);border-radius:52% 48% 58% 42%/45% 55% 45% 55%;animation:morph 18s ease-in-out infinite reverse}
+.b2 .mask{border-radius:55% 45% 50% 50%/45% 55% 45% 55%;animation:none;border:6px solid var(--cream)}
+.ring2{position:absolute;inset:-4% -2% 10% 14%;border:1px solid rgba(109,92,78,.35);border-radius:52% 48% 58% 42%/45% 55% 45% 55%;animation:spin 60s linear infinite}
 @keyframes morph{0%,100%{border-radius:46% 54% 42% 58%/52% 40% 60% 48%}33%{border-radius:58% 42% 52% 48%/42% 58% 42% 58%}66%{border-radius:40% 60% 46% 54%/58% 46% 54% 42%}}
 .story{font:300 clamp(22px,2.4vw,32px)/1.55 var(--fh);margin:.6em 0 0}
 .story .wd{opacity:.14;transition:opacity .5s}
@@ -291,7 +231,7 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 .sugg .chip{font-size:14px;min-height:40px}
 .ai-note{font-size:13.5px;color:var(--stone);margin:16px 0 0;max-width:36em}
 .frame{position:relative;aspect-ratio:1;max-width:540px;width:100%;margin:0 auto}
-.frame .fm{position:absolute;inset:0;border-radius:46% 54% 42% 58%/52% 40% 60% 48%;overflow:hidden;background:linear-gradient(140deg,#efe7dc,#e3d6c5);animation:morph 16s ease-in-out infinite;box-shadow:0 50px 90px -45px rgba(60,40,25,.5)}
+.frame .fm{position:absolute;inset:0;border-radius:46% 54% 42% 58%/52% 40% 60% 48%;overflow:hidden;background:linear-gradient(140deg,#efe7dc,#e3d6c5);box-shadow:0 50px 90px -45px rgba(60,40,25,.5)}
 .frame .fm img{width:100%;height:100%;object-fit:cover;clip-path:circle(0% at 50% 50%);transition:clip-path 1.6s var(--ease)}
 .frame .fm img.on{clip-path:circle(75% at 50% 50%)}
 .frame .ring3{position:absolute;inset:-16px;border:1px dashed rgba(109,92,78,.4);border-radius:50%;animation:spin 40s linear infinite}
@@ -346,34 +286,16 @@ footer{background:var(--ink);color:#d6ccc1;padding:0 0 40px;position:relative;z-
 #mbar{display:none}
 @media(max-width:900px){
   #fab{display:none}
-  #mbar{position:fixed;inset:auto 10px 10px;z-index:70;display:flex;gap:8px;padding:8px;border-radius:999px;background:rgba(43,38,35,.92);backdrop-filter:blur(10px);transform:translateY(140%);transition:transform .6s var(--ease)}
+  #mbar{position:fixed;inset:auto 10px 10px;z-index:70;display:flex;gap:8px;padding:8px;border-radius:999px;background:rgba(43,38,35,.96);transform:translateY(140%);transition:transform .6s var(--ease)}
   #mbar.on{transform:none}
   #mbar .btn{flex:1;min-height:48px;padding:0 12px;font-size:15px}
 }
 
 /* narrow */
 @media(max-width:900px){
-  #hero .wrap,.sticky .wrap,.ab,.or{grid-template-columns:minmax(0,1fr)}
-  #hero{align-items:flex-end;padding-bottom:96px}
-  .hero-txt{padding:40px 18px 0;margin:0 -18px;background:linear-gradient(transparent,rgba(250,248,245,.94) 24%)}
-  .giant{bottom:auto;top:16vh}
-  .sticky{align-items:flex-end;padding-bottom:24px}
-  .pcol{background:rgba(250,248,245,.86);backdrop-filter:blur(8px);border-radius:28px;padding:18px 20px;margin:0 -6px}
-  .dots{margin-bottom:14px}.step h2{font-size:32px}.step p{font-size:16px}.step .num{font-size:54px}.drag-hint{display:none}.chip-lbl{margin-top:10px}
-  #showcase .sticky{align-items:flex-end;padding-bottom:28px}
-  .sc-panel{padding:20px;max-width:none;background:rgba(20,40,29,.75)}
-  .sc-bar{margin-top:16px}.sc-hint{display:none}.sc-count{margin-top:8px}
+  .ab,.or{grid-template-columns:minmax(0,1fr)}
   .blobs{max-width:360px}
 }
-/* no WebGL */
-.no3d #stage,.no3d #showcase{display:none}
-.no3d #process{height:auto}
-.no3d #process .sticky{position:relative;height:auto;padding:90px 0}
-.no3d .steps{gap:44px}
-.no3d .step{grid-area:auto;opacity:1;transform:none;filter:none}
-.no3d .dots,.no3d .drag-hint,.no3d .chips,.no3d .chip-lbl,.no3d .scroll-hint{display:none}
-.no3d .hero-fallback{display:block;border-radius:50% 50% 48% 52%/55% 55% 45% 45%;overflow:hidden;max-width:440px;aspect-ratio:3/4;margin:auto}
-.no3d .hero-fallback img{width:100%;height:100%;object-fit:cover}
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -381,8 +303,7 @@ footer{background:var(--ink);color:#d6ccc1;padding:0 0 40px;position:relative;z-
 }
 </style>
 </head>
-<body class="lock">
-<div id="loader" aria-hidden="true"><div class="ld"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="34"/></svg><span class="brand">Terra Calma</span></div></div>
+<body>
 <div id="cur" aria-hidden="true"></div>
 <div id="bar"></div>
 <header id="hdr" class="solid">
@@ -418,15 +339,15 @@ footer{background:var(--ink);color:#d6ccc1;padding:0 0 40px;position:relative;z-
             </div>
             <div class="trust fade-up" style="transition-delay:1.15s" id="trust"></div>
           </div>
-          <div class="ch"><span class="num">i.</span><p class="kick">אדמה</p><h2>חימר גולמי.</h2><p>מינימליזם אורגני, חימר גולמי וגלזורות טבעיות בגווני אדמה ומנטה פסטלי.</p><img class="ch-img" loading="lazy" src="assets/marble-plate.jpg" alt=""></div>
-          <div class="ch"><span class="num">ii.</span><p class="kick">ידיים</p><h2>נשימה, האטה.</h2><p>כלים שנוצרו מתוך מקום נשימה, האטה וחיבור בין שקט בראש לרעש בידיים.</p><img class="ch-img" loading="lazy" src="assets/round-dish.jpg" alt=""></div>
-          <div class="ch"><span class="num">iii.</span><p class="kick">אש</p><h2>גלזורות טבעיות.</h2><p>כל הכלים נשרפים בטמפרטורה גבוהה, עם גלזורות עמידות לשימוש בטוח ושטיפה במדיח.</p><img class="ch-img" loading="lazy" src="assets/oval-platter.jpg" alt=""></div>
-          <div class="ch"><span class="num">iv.</span><p class="kick">צורה</p><h2>100% עבודת יד.</h2><p>כל כלי יחיד ומיוחד במינו.</p><img class="ch-img" loading="lazy" src="assets/candle-holders.jpg" alt=""></div>
-          <div class="ch"><span class="num">v.</span><p class="kick">שורשים</p><h2>טרה קאלמה.</h2><p>אדמה רגועה, באיטלקית.</p><img class="ch-img" loading="lazy" src="assets/map-earth.jpg" alt=""></div>
-          <div class="ch"><span class="num">vi.</span><p class="kick">אחת ויחידה</p><h2>אף כלי לא חוזר על עצמו.</h2><p>הגוונים והצורות המשתנות הופכים כל יצירה לאחת ויחידה.</p><img class="ch-img" loading="lazy" src="assets/map-speckled.jpg" alt=""></div>
+          <div class="ch"><span class="num">i.</span><p class="kick">אדמה</p><h2>חימר גולמי.</h2><p>מינימליזם אורגני, חימר גולמי וגלזורות טבעיות בגווני אדמה ומנטה פסטלי.</p><img class="ch-img" loading="lazy" decoding="async" src="assets/marble-plate-720.webp" alt=""></div>
+          <div class="ch"><span class="num">ii.</span><p class="kick">ידיים</p><h2>נשימה, האטה.</h2><p>כלים שנוצרו מתוך מקום נשימה, האטה וחיבור בין שקט בראש לרעש בידיים.</p><img class="ch-img" loading="lazy" decoding="async" src="assets/round-dish-720.webp" alt=""></div>
+          <div class="ch"><span class="num">iii.</span><p class="kick">אש</p><h2>גלזורות טבעיות.</h2><p>כל הכלים נשרפים בטמפרטורה גבוהה, עם גלזורות עמידות לשימוש בטוח ושטיפה במדיח.</p><img class="ch-img" loading="lazy" decoding="async" src="assets/oval-platter-720.webp" alt=""></div>
+          <div class="ch"><span class="num">iv.</span><p class="kick">צורה</p><h2>100% עבודת יד.</h2><p>כל כלי יחיד ומיוחד במינו.</p><img class="ch-img" loading="lazy" decoding="async" src="assets/candle-holders-720.webp" alt=""></div>
+          <div class="ch"><span class="num">v.</span><p class="kick">שורשים</p><h2>טרה קאלמה.</h2><p>אדמה רגועה, באיטלקית.</p><img class="ch-img" loading="lazy" decoding="async" src="assets/map-earth-720.webp" alt=""></div>
+          <div class="ch"><span class="num">vi.</span><p class="kick">אחת ויחידה</p><h2>אף כלי לא חוזר על עצמו.</h2><p>הגוונים והצורות המשתנות הופכים כל יצירה לאחת ויחידה.</p><img class="ch-img" loading="lazy" decoding="async" src="assets/map-speckled-720.webp" alt=""></div>
           <div class="ch"><span class="num">vii.</span><p class="kick">לשולחן</p><h2>כלי אוכל ונוי למטבח ולבית.</h2><p>קולקציית הסטודיו · מהדורות קטנות.</p>
             <div class="ctas" style="margin-top:26px"><a href="#collection" class="btn btn-mint mag">לצפייה בכלים</a><a class="btn btn-wa wa mag" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer">דברו איתי בווטסאפ</a></div>
-            <img class="ch-img" loading="lazy" src="assets/challah-plate.jpg" alt=""></div>
+            <img class="ch-img" loading="lazy" decoding="async" src="assets/challah-plate-720.webp" alt=""></div>
         </div>
       </div>
       <nav class="rail" id="rail" aria-label="פרקי הסיפור"></nav>
@@ -451,8 +372,8 @@ footer{background:var(--ink);color:#d6ccc1;padding:0 0 40px;position:relative;z-
     <div class="wrap ab">
       <div class="blobs rv-t">
         <div class="ring2"></div>
-        <div class="blob b1"><div class="mask"><img class="par" data-s="-60" src="assets/map-earth.jpg" alt="יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגווני מרווה ואדמה." loading="lazy"></div></div>
-        <div class="blob b2"><div class="mask"><img class="par" data-s="50" src="assets/candle-holders.jpg" alt="זוג פמוטי קרמיקה פיסוליים בעבודת יד בגלזורת אבן אפורה מנוקדת וגלזורה תכולה." loading="lazy"></div></div>
+        <div class="blob b1"><div class="mask"><img class="par" data-s="-60" src="assets/map-earth-720.webp" srcset="assets/map-earth-720.webp 720w, assets/map-earth.webp 1200w" sizes="(max-width:900px) 80vw,400px" decoding="async" alt="יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגווני מרווה ואדמה." loading="lazy"></div></div>
+        <div class="blob b2"><div class="mask"><img class="par" data-s="50" src="assets/candle-holders-720.webp" decoding="async" alt="זוג פמוטי קרמיקה פיסוליים בעבודת יד בגלזורת אבן אפורה מנוקדת וגלזורה תכולה." loading="lazy"></div></div>
       </div>
       <div>
         <p class="eyebrow">אדמה רגועה · כלי קרמיקה בעבודת יד.</p>
@@ -527,7 +448,6 @@ footer{background:var(--ink);color:#d6ccc1;padding:0 0 40px;position:relative;z-
 <a id="fab" class="wa" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer" aria-label="שליחת הודעה בווטסאפ"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg></a>
 <div id="mbar"><a class="btn btn-wa wa" data-msg="היי אודיה, הגעתי מהאתר של Terra Calma ואשמח לשמוע על הכלים הזמינים." target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>דברו איתי בווטסאפ</a><a class="btn btn-mint" href="#collection">לצפייה בכלים</a></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 {
 /* ================= DATA (from the original project) ================= */
@@ -535,13 +455,13 @@ const WHATSAPP_NUMBER='972502662926',WHATSAPP_DISPLAY='050-2662926';
 const INSTAGRAM_URL='https://www.instagram.com/terra_calma?dmpr=MTJ5cm9zbG9qZGtiMA%3D%3D&utm_source=qr';
 const CATEGORIES=[{key:'all',label:'כל הכלים'},{key:'plates',label:'צלחות ומגשים'},{key:'bowls',label:'קערות וצלוחיות'},{key:'decor',label:'פריטים דקורטיביים'}];
 const PRODUCTS=[
- {id:'challah-plate',name:'צלחת חלה "שבת שלום"',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'שמנת מנוקדת, בחריטת יד וגלזורה תכולה',dimensions:'קוטר כ-30 ס״מ.',price:180,image:'assets/challah-plate.jpg',px:.5,py:.62,alt:'צלחת חלה מקרמיקה בעבודת יד עם כיתוב שבת שלום בגלזורה תכולה ואיורי דגים על מפת פשתן לבנה.'},
- {id:'marbled-stone-plate',name:'צלחת הגשה משוישת — אבן וחול',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'שיוש טבעי בגווני אבן, שמנת ופחם',dimensions:'קוטר כ-26 ס״מ.',price:150,image:'assets/marble-plate.jpg',px:.56,py:.5,alt:'צלחת הגשה עגולה מקרמיקה בעבודת יד עם שיוש טבעי בגווני אפור אבן, שמנת וחום עמוק.'},
- {id:'oval-brown-platter',name:'מגש הגשה אובלי חום',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'גלזורה חומה, משוישת בגווני אדמה',dimensions:'אורך כ-32 ס״מ · רוחב כ-20 ס״מ.',price:160,image:'assets/oval-platter.jpg',px:.5,py:.55,alt:'מגש הגשה אובלי מקרמיקה בעבודת יד בגלזורה חומה עשירה ומשוישת.'},
- {id:'marbled-round-dish',name:'צלוחית עגולה משוישת',category:'bowls',categoryLabel:'קערות וצלוחיות',clayNote:'גווני אדמה וחול, עם שקעים בצדדים',dimensions:'קוטר כ-14 ס״מ.',price:85,image:'assets/round-dish.jpg',px:.5,py:.68,alt:'צלוחית קרמיקה עגולה בעבודת יד בגלזורה חומה משוישת עם שני שקעים בשפה.'},
- {id:'sculptural-candle-holders',name:'זוג פמוטים פיסוליים',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורת אבן מנוקדת ותכלת רך',dimensions:'זוג פמוטים לנרות · בעבודת יד.',price:145,image:'assets/candle-holders.jpg',px:.5,py:.28,alt:'זוג פמוטי קרמיקה פיסוליים בעבודת יד בגלזורת אבן אפורה מנוקדת וגלזורה תכולה.'},
- {id:'israel-wall-earth',name:'תבליט קיר ארץ ישראל — אדמה ומרווה',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורת מרווה, חמרה וכחול עדין',dimensions:'גובה כ-26 ס״מ · כולל חור לתלייה.',price:140,image:'assets/map-earth.jpg',px:.5,py:.5,alt:'יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגווני ירוק מרווה, חמרה וכחול.'},
- {id:'israel-wall-speckled',name:'תבליט קיר ארץ ישראל — מנוקד',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורה בהירה, מנוקדת בעבודת יד',dimensions:'גובה כ-26 ס״מ · כולל חור לתלייה.',price:140,image:'assets/map-speckled.jpg',px:.5,py:.5,alt:'יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגלזורה לבנה-תכולה מנוקדת.'}
+ {id:'challah-plate',name:'צלחת חלה "שבת שלום"',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'שמנת מנוקדת, בחריטת יד וגלזורה תכולה',dimensions:'קוטר כ-30 ס״מ.',price:180,image:'assets/challah-plate',px:.5,py:.62,alt:'צלחת חלה מקרמיקה בעבודת יד עם כיתוב שבת שלום בגלזורה תכולה ואיורי דגים על מפת פשתן לבנה.'},
+ {id:'marbled-stone-plate',name:'צלחת הגשה משוישת — אבן וחול',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'שיוש טבעי בגווני אבן, שמנת ופחם',dimensions:'קוטר כ-26 ס״מ.',price:150,image:'assets/marble-plate',px:.56,py:.5,alt:'צלחת הגשה עגולה מקרמיקה בעבודת יד עם שיוש טבעי בגווני אפור אבן, שמנת וחום עמוק.'},
+ {id:'oval-brown-platter',name:'מגש הגשה אובלי חום',category:'plates',categoryLabel:'צלחות ומגשים',clayNote:'גלזורה חומה, משוישת בגווני אדמה',dimensions:'אורך כ-32 ס״מ · רוחב כ-20 ס״מ.',price:160,image:'assets/oval-platter',px:.5,py:.55,alt:'מגש הגשה אובלי מקרמיקה בעבודת יד בגלזורה חומה עשירה ומשוישת.'},
+ {id:'marbled-round-dish',name:'צלוחית עגולה משוישת',category:'bowls',categoryLabel:'קערות וצלוחיות',clayNote:'גווני אדמה וחול, עם שקעים בצדדים',dimensions:'קוטר כ-14 ס״מ.',price:85,image:'assets/round-dish',px:.5,py:.68,alt:'צלוחית קרמיקה עגולה בעבודת יד בגלזורה חומה משוישת עם שני שקעים בשפה.'},
+ {id:'sculptural-candle-holders',name:'זוג פמוטים פיסוליים',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורת אבן מנוקדת ותכלת רך',dimensions:'זוג פמוטים לנרות · בעבודת יד.',price:145,image:'assets/candle-holders',px:.5,py:.28,alt:'זוג פמוטי קרמיקה פיסוליים בעבודת יד בגלזורת אבן אפורה מנוקדת וגלזורה תכולה.'},
+ {id:'israel-wall-earth',name:'תבליט קיר ארץ ישראל — אדמה ומרווה',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורת מרווה, חמרה וכחול עדין',dimensions:'גובה כ-26 ס״מ · כולל חור לתלייה.',price:140,image:'assets/map-earth',px:.5,py:.5,alt:'יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגווני ירוק מרווה, חמרה וכחול.'},
+ {id:'israel-wall-speckled',name:'תבליט קיר ארץ ישראל — מנוקד',category:'decor',categoryLabel:'פריטים דקורטיביים',clayNote:'גלזורה בהירה, מנוקדת בעבודת יד',dimensions:'גובה כ-26 ס״מ · כולל חור לתלייה.',price:140,image:'assets/map-speckled',px:.5,py:.5,alt:'יצירת קרמיקה לתלייה על הקיר בצורת מפת ארץ ישראל בגלזורה לבנה-תכולה מנוקדת.'}
 ];
 const CARE=[
  {t:'מתאים למדיח כלים',d:'כל הכלים נשרפים בטמפרטורה גבוהה, עם גלזורות עמידות לשימוש בטוח ושטיפה במדיח. מומלץ לשטוף ידני.',i:'<path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11Z"/><path d="M9 14a3 3 0 0 0 3 3"/>'},
@@ -581,7 +501,7 @@ function renderTabs(){tabs.innerHTML=CATEGORIES.map(c=>`<button class="tab" role
 function renderGrid(){
   const list=cat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===cat);
   grid.innerHTML=list.map((p,i)=>`<article class="card rv" style="transition-delay:${(i%3)*.12}s"><div class="card-in">
-    <div class="ph"><img src="${p.image}" alt="${esc(p.alt)}" loading="lazy" style="object-position:${p.px*100}% ${p.py*100}%"><span class="tag">${esc(p.categoryLabel)}</span><span class="shine"></span></div>
+    <div class="ph"><img src="${p.image}-720.webp" srcset="${p.image}-720.webp 720w, ${p.image}.webp 1200w" sizes="(max-width:600px) 92vw,(max-width:1000px) 46vw,380px" width="720" height="792" decoding="async" alt="${esc(p.alt)}" loading="lazy" style="object-position:${p.px*100}% ${p.py*100}%"><span class="tag">${esc(p.categoryLabel)}</span><span class="shine"></span></div>
     <div class="info"><p class="note">${esc(p.clayNote)}</p>
       <div class="row"><h3>${esc(p.name)}</h3><span class="price">₪${p.price}</span></div>
       <p class="dim">${esc(p.dimensions)}</p>
@@ -649,9 +569,10 @@ document.querySelectorAll('.rv-t').forEach(observe);
 bindMag(document);
 const cur=$('cur');let cx=-100,cy=-100,tx=-100,ty=-100;
 if(FINE&&!RM){
-  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY},{passive:true});
-  document.addEventListener('pointerover',e=>cur.classList.toggle('big',!!e.target.closest('a,button,.card,#stage,select,input,textarea')));
-  const cl=()=>{cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cur.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(cl)};cl();
+  let run=false;
+  const cl=()=>{cx+=(tx-cx)*.22;cy+=(ty-cy)*.22;cur.style.transform=`translate3d(${cx}px,${cy}px,0)`;if(Math.abs(tx-cx)+Math.abs(ty-cy)>.3)requestAnimationFrame(cl);else run=false};
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!run){run=true;requestAnimationFrame(cl)}},{passive:true});
+  document.addEventListener('pointerover',e=>cur.classList.toggle('big',!!e.target.closest('a,button,.card,select,input,textarea')));
 }else cur.remove();
 
 /* story words + counters */
@@ -668,13 +589,13 @@ document.querySelectorAll('.cnt').forEach(c=>{c.textContent=c.dataset.from||0;ci
 const story=$('story'),chEls=[...document.querySelectorAll('.ch')],rail=$('rail'),cap=$('cap'),hint=document.querySelector('.st .scroll-hint');
 const CH=[
  {k:'פתיח',img:null,pid:-1,z:[1.25,1.05],f:[[.5,.5],[.5,.5]]},
- {k:'אדמה',img:'assets/marble-plate.jpg',pid:1,z:[2.8,1.12],f:[[.36,.42],[.56,.5]]},
- {k:'ידיים',img:'assets/round-dish.jpg',pid:3,z:[2.6,1.15],f:[[.5,.56],[.5,.68]]},
- {k:'אש',img:'assets/oval-platter.jpg',pid:2,z:[2.1,1.08],f:[[.42,.42],[.5,.55]]},
- {k:'צורה',img:'assets/candle-holders.jpg',pid:4,z:[2,1.05],f:[[.7,.3],[.5,.3]]},
- {k:'שורשים',img:'assets/map-earth.jpg',pid:5,z:[1.9,1.1],f:[[.5,.35],[.5,.5]]},
- {k:'אחת ויחידה',img:'assets/map-speckled.jpg',pid:6,z:[1.05,1.7],f:[[.5,.5],[.5,.42]]},
- {k:'לשולחן',img:'assets/challah-plate.jpg',pid:0,z:[1.8,1.0],f:[[.55,.5],[.5,.62]]}
+ {k:'אדמה',img:'assets/marble-plate.webp',pid:1,z:[2.8,1.12],f:[[.36,.42],[.56,.5]]},
+ {k:'ידיים',img:'assets/round-dish.webp',pid:3,z:[2.6,1.15],f:[[.5,.56],[.5,.68]]},
+ {k:'אש',img:'assets/oval-platter.webp',pid:2,z:[2.1,1.08],f:[[.42,.42],[.5,.55]]},
+ {k:'צורה',img:'assets/candle-holders.webp',pid:4,z:[2,1.05],f:[[.7,.3],[.5,.3]]},
+ {k:'שורשים',img:'assets/map-earth.webp',pid:5,z:[1.9,1.1],f:[[.5,.35],[.5,.5]]},
+ {k:'אחת ויחידה',img:'assets/map-speckled.webp',pid:6,z:[1.05,1.7],f:[[.5,.5],[.5,.42]]},
+ {k:'לשולחן',img:'assets/challah-plate.webp',pid:0,z:[1.8,1.0],f:[[.55,.5],[.5,.62]]}
 ];
 const NC=CH.length;
 rail.innerHTML=CH.map((c,i)=>`<button type="button" data-i="${i}"><i></i>${esc(c.k)}</button>`).join('');
@@ -696,101 +617,112 @@ function setChapter(i){
 setChapter(0);
 const SP={pos:0};
 let has3D=false;
-try{has3D=!!window.THREE&&!!(document.createElement('canvas').getContext('webgl'))}catch(e){}
+try{has3D=!!document.createElement('canvas').getContext('webgl')}catch(e){}
 if(!has3D)document.documentElement.classList.add('no3d');
 let storyApi=null;
 
 function initStory(){
-  const T=THREE,cv=$('storyGL');
-  const renderer=new T.WebGLRenderer({canvas:cv,antialias:false});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
-  const scene=new T.Scene(),cam=new T.OrthographicCamera(-1,1,1,-1,0,1);
-  // clay on the wheel, seen from above (procedural, not a photo)
-  const clay=(()=>{const N=640,c=document.createElement('canvas');c.width=c.height=N;const g=c.getContext('2d'),im=g.createImageData(N,N),d=im.data;
-    const h=(x,y)=>{const s=Math.sin(x*127.1+y*311.7)*43758.5453;return s-Math.floor(s)};
-    const vn=(x,y)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf),a=h(xi,yi),b=h(xi+1,yi),cc=h(xi,yi+1),dd=h(xi+1,yi+1);return a+(b-a)*u+(cc-a)*v+(a-b-cc+dd)*u*v};
-    const fb=(x,y)=>{let s=0,a=.5,f=1;for(let o=0;o<4;o++){s+=a*vn(x*f,y*f);a*=.5;f*=2}return s};
-    for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=x/N-.5,dy=y/N-.5,r=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
-      const n=fb(x/N*6,y/N*6),n2=fb(x/N*22,y/N*22),rings=.5+.5*Math.sin(r*170+n*9+Math.sin(an*2+n*4)*1.4);
-      let L=.4+.3*n+.08*n2+.06*rings*(r<.42?1:.3);
-      const wet=Math.max(0,1-Math.abs(r-.2)*9)*.25;L+=wet*rings;
-      if(r>.44)L*=.55+.2*fb(an*4,r*20);
-      const sp=h(x,y)>.992?-.12:0;
-      const i=(y*N+x)*4;d[i]=Math.min(255,(L+sp)*255*.95);d[i+1]=Math.min(255,(L+sp)*255*.68);d[i+2]=Math.min(255,(L+sp)*255*.52);d[i+3]=255}
-    g.putImageData(im,0,0);const t=new T.CanvasTexture(c);t.minFilter=T.LinearFilter;t.generateMipmaps=false;return t})();
-  const texs=CH.map(c=>c.img?null:clay),sizes=CH.map(()=>new T.Vector2(1,1));
-  const loader=new T.TextureLoader();
-  CH.forEach((c,i)=>{if(!c.img)return;loader.load(c.img,t=>{t.minFilter=T.LinearFilter;t.generateMipmaps=false;texs[i]=t;sizes[i].set(t.image.width,t.image.height)})});
-  const U={tA:{value:clay},tB:{value:clay},sA:{value:new T.Vector2(1,1)},sB:{value:new T.Vector2(1,1)},res:{value:new T.Vector2(1,1)},
-    mixv:{value:0},time:{value:0},glow:{value:0},zA:{value:1},zB:{value:1},fA:{value:new T.Vector2(.5,.5)},fB:{value:new T.Vector2(.5,.5)},
-    spA:{value:0},spB:{value:0},mouse:{value:new T.Vector2()},readyA:{value:1},readyB:{value:1}};
-  const frag=`
-precision highp float;
-uniform sampler2D tA,tB;uniform vec2 sA,sB,res,fA,fB,mouse;uniform float mixv,time,glow,zA,zB,spA,spB,readyA,readyB;
+  const cv=$('storyGL');
+  const gl=cv.getContext('webgl',{antialias:false,alpha:false,depth:false,stencil:false,powerPreference:'high-performance',premultipliedAlpha:false});
+  if(!gl)throw new Error('no webgl');
+  const vs='attribute vec2 p;varying vec2 vUv;void main(){vUv=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+  const fs=`precision mediump float;
+uniform sampler2D tA,tB;uniform vec2 sA,sB,res,fA,fB,mouse;uniform float mixv,time,glow,zA,zB,spA,spB,rdA,rdB,clA,clB;
 varying vec2 vUv;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
-float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<5;i++){s+=a*noise(p);p*=2.02;a*=.5;}return s;}
-vec2 cover(vec2 uv,vec2 size,float z,vec2 foc,float sp){
-  float rs=res.x/res.y,ri=size.x/size.y;
-  vec2 s=rs>ri?vec2(1.,ri/rs):vec2(rs/ri,1.);s/=z;
-  vec2 c=clamp(foc,s*.5,1.-s*.5);
-  vec2 p=(uv-.5)*vec2(rs,1.);float cs=cos(sp),sn=sin(sp);p=mat2(cs,-sn,sn,cs)*p;p/=vec2(rs,1.);
-  return c+p*s;}
-vec3 sampleT(sampler2D t,vec2 uv,float ready){vec3 c=texture2D(t,uv).rgb;return mix(vec3(.11,.09,.07),c,ready);}
+float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<4;i++){s+=a*noise(p);p*=2.03;a*=.5;}return s;}
+vec2 rot(vec2 p,float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c)*p;}
+vec3 clay(vec2 uv,float z,float sp){
+  vec2 p=rot((uv-.5)*vec2(res.x/res.y,1.),sp)/z;float r=length(p),an=atan(p.y,p.x);
+  float n=fbm(p*6.+3.),rings=.5+.5*sin(r*170.+n*9.+sin(an*2.+n*4.)*1.4);
+  float L=.4+.3*n+.06*rings*(r<.42?1.:.3);L+=max(0.,1.-abs(r-.2)*9.)*.25*rings;
+  if(r>.44)L*=.55+.2*n;
+  return vec3(L*.95,L*.68,L*.52);}
+vec2 cover(vec2 uv,vec2 size,float z,vec2 foc){
+  float rs=res.x/res.y,ri=size.x/size.y;vec2 s=rs>ri?vec2(1.,ri/rs):vec2(rs/ri,1.);s/=z;
+  return clamp(foc,s*.5,1.-s*.5)+(uv-.5)*s;}
+vec3 pick(sampler2D t,vec2 uv,vec2 size,float z,vec2 foc,float sp,float rd,float cl){
+  if(cl>.5)return clay(uv,z,sp);
+  return mix(vec3(.11,.09,.07),texture2D(t,cover(uv,size,z,foc)).rgb,rd);}
 void main(){
   vec2 uv=vUv+mouse*.008;
   float n=fbm(vUv*vec2(res.x/res.y,1.)*2.6+vec2(0.,time*.04));
-  float th=mixv*1.3-.15;
-  float m=smoothstep(th+.09,th-.09,n);
-  vec2 d=vec2(n-.5,fbm(vUv*3.1+7.)-.5)*.12;
-  vec3 a=sampleT(tA,cover(uv+d*mixv,sA,zA,fA,spA),readyA);
-  vec3 b=sampleT(tB,cover(uv-d*(1.-mixv),sB,zB,fB,spB),readyB);
-  vec3 col=mix(a,b,m);
-  float rim=1.-abs(m*2.-1.);rim=pow(rim,2.)*step(.001,mixv)*step(mixv,.999);
-  col=mix(col,vec3(.42,.28,.2),rim*.75);
-  // kiln
-  vec2 q=vUv-vec2(.5,.05);
-  float heat=fbm(vec2(vUv.x*4.,vUv.y*3.-time*.5));
-  col=mix(col,col*vec3(1.12,.86,.7)+vec3(.32,.1,.02)*heat*smoothstep(1.,.0,length(q)),glow);
-  vec2 g=vec2(vUv.x*res.x/res.y*26.,vUv.y*12.-time*1.4);vec2 id=floor(g),f=fract(g)-.5;float hs=hash(id);vec2 jt=vec2(hash(id+3.1),hash(id+7.7))-.5;
-  float spark=step(.93,hs)*smoothstep(.09,0.,length(f+jt*.7+vec2(sin(time*2.+hs*6.)*.15,0.)));
-  col+=glow*spark*vec3(1.,.62,.3)*1.6;
+  float m=smoothstep(mixv*1.3-.06,mixv*1.3-.24,n);
+  vec2 d=vec2(n-.5,noise(vUv*5.+7.)-.5)*.12;
+  vec3 a=pick(tA,uv+d*mixv,sA,zA,fA,spA,rdA,clA);
+  vec3 col=a;
+  if(mixv>.001){vec3 b=pick(tB,uv-d*(1.-mixv),sB,zB,fB,spB,rdB,clB);col=mix(a,b,m);
+    float rim=1.-abs(m*2.-1.);col=mix(col,vec3(.42,.28,.2),rim*rim*.75*step(mixv,.999));}
+  if(glow>.001){
+    float heat=fbm(vec2(vUv.x*4.,vUv.y*3.-time*.5));
+    col=mix(col,col*vec3(1.12,.86,.7)+vec3(.32,.1,.02)*heat*smoothstep(1.,0.,length(vUv-vec2(.5,.05))),glow);
+    vec2 g=vec2(vUv.x*res.x/res.y*26.,vUv.y*12.-time*1.4);vec2 id=floor(g),f=fract(g)-.5;float hs=hash(id);vec2 jt=vec2(hash(id+3.1),hash(id+7.7))-.5;
+    col+=glow*step(.93,hs)*smoothstep(.09,0.,length(f+jt*.7+vec2(sin(time*2.+hs*6.)*.15,0.)))*vec3(1.,.62,.3)*1.6;}
   col*=mix(1.,smoothstep(1.25,.3,length((vUv-.5)*vec2(1.2,1.))),.5);
-  col+=(hash(vUv*res+time)-.5)*.05;
-  gl_FragColor=vec4(col,1.);
-}`;
-  const mat=new T.ShaderMaterial({uniforms:U,vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',fragmentShader:frag});
-  scene.add(new T.Mesh(new T.PlaneGeometry(2,2),mat));
-  let W=0,H=0,visible=true,mx=0,my=0,dead=false;
-  function resize(){W=cv.clientWidth;H=cv.clientHeight;renderer.setSize(W,H,false);U.res.value.set(W,H)}
+  gl_FragColor=vec4(col,1.);}`;
+  const sh=(t,src)=>{const o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o};
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(pr));
+  gl.useProgram(pr);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const ap=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(ap);gl.vertexAttribPointer(ap,2,gl.FLOAT,false,0,0);
+  const L={};['tA','tB','sA','sB','res','fA','fB','mouse','mixv','time','glow','zA','zB','spA','spB','rdA','rdB','clA','clB'].forEach(k=>L[k]=gl.getUniformLocation(pr,k));
+  gl.uniform1i(L.tA,0);gl.uniform1i(L.tB,1);
+  const empty=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,empty);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,1,1,0,gl.RGB,gl.UNSIGNED_BYTE,new Uint8Array([28,23,18]));
+  const tex=CH.map(()=>null),size=CH.map(()=>[1,1]);
+  function load(i){
+    const c=CH[i];if(!c.img||tex[i]||c.loading)return;c.loading=1;
+    const im=new Image();im.decoding='async';im.src=c.img;
+    (im.decode?im.decode():new Promise(r=>im.onload=r)).then(()=>{
+      const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,im);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+      tex[i]=t;size[i]=[im.naturalWidth,im.naturalHeight];c.fade=0;dirty=true;
+    }).catch(()=>{c.loading=0});
+  }
+  // load the next chapters ahead of the scroll, idle-time
+  const idle=window.requestIdleCallback||(f=>setTimeout(f,200));
+  const prefetch=k=>{for(let j=k;j<=Math.min(NC-1,k+2);j++)load(j)};
+  idle(()=>prefetch(1));
+  let W=0,H=0,visible=true,mx=0,my=0,mxs=0,mys=0,smp=0,dirty=true,lastPos=-1;
+  const mobile=matchMedia('(max-width:900px)').matches;
+  function resize(){const dpr=Math.min(devicePixelRatio||1,mobile?1:1.25);W=Math.round(cv.clientWidth*dpr);H=Math.round(cv.clientHeight*dpr);cv.width=W;cv.height=H;gl.viewport(0,0,W,H);gl.uniform2f(L.res,W,H);dirty=true}
   addEventListener('resize',resize);resize();
-  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+  if(FINE)addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
   const lerp=(a,b,t)=>a+(b-a)*t;
-  let sm_pos=0;
-  function setCh(slot,i,pos){
+  function setCh(sl,i,pos,unit){
     const c=CH[i],t=Math.min(1,Math.max(0,(pos-i+.6)/1.6)),e=t*t*(3-2*t);
-    U['t'+slot].value=texs[i]||clay;U['ready'+slot].value=texs[i]?1:0;
-    U['s'+slot].value.copy(texs[i]===clay?new T.Vector2(1,1):sizes[i]);
-    U['z'+slot].value=lerp(c.z[0],c.z[1],e);
-    U['f'+slot].value.set(lerp(c.f[0][0],c.f[1][0],e),1-lerp(c.f[0][1],c.f[1][1],e));
+    gl.activeTexture(unit);gl.bindTexture(gl.TEXTURE_2D,tex[i]||empty);
+    if(tex[i]&&c.fade<1){c.fade=Math.min(1,c.fade+.06);dirty=true}
+    gl.uniform1f(L['rd'+sl],c.img?(tex[i]?c.fade:0):1);gl.uniform1f(L['cl'+sl],c.img?0:1);
+    gl.uniform2f(L['s'+sl],size[i][0],size[i][1]);
+    gl.uniform1f(L['z'+sl],lerp(c.z[0],c.z[1],e));
+    gl.uniform2f(L['f'+sl],lerp(c.f[0][0],c.f[1][0],e),1-lerp(c.f[0][1],c.f[1][1],e));
   }
   function frame(now){
-    if(dead)return;requestAnimationFrame(frame);if(!visible)return;
-    try{
-      sm_pos+=(SP.pos-sm_pos)*(RM?1:.12);
-      const pos=sm_pos,A=Math.min(NC-1,Math.floor(pos)),B=Math.min(NC-1,A+1),fr=pos-A;
-      setCh('A',A,pos);setCh('B',B,pos);
-      U.mixv.value=B===A?0:sm(.45,1,fr);
-      const tm=now/1000;U.time.value=tm;
-      U.spA.value=A===0?tm*.35:0;U.spB.value=B===0?tm*.35:0;
-      U.glow.value=sm(2.55,3,pos)*(1-sm(3.35,3.75,pos));
-      U.mouse.value.x+=(mx-U.mouse.value.x)*.05;U.mouse.value.y+=(-my-U.mouse.value.y)*.05;
-      renderer.render(scene,cam);
-    }catch(err){dead=true;console.error(err);document.documentElement.classList.add('no3d')}
+    requestAnimationFrame(frame);
+    if(!visible||document.hidden)return;
+    smp+=(SP.pos-smp)*(RM?1:.14);if(Math.abs(SP.pos-smp)<.0005)smp=SP.pos;
+    mxs+=(mx-mxs)*.06;mys+=(my-mys)*.06;
+    const pos=smp,A=Math.min(NC-1,Math.floor(pos)),B=Math.min(NC-1,A+1),fr=pos-A;
+    const mixv=B===A?0:sm(.45,1,fr),glow=sm(2.55,3,pos)*(1-sm(3.35,3.75,pos));
+    const moving=pos!==lastPos||Math.abs(mx-mxs)+Math.abs(my-mys)>.0005;
+    const live=A===0||(mixv>0&&mixv<1)||glow>0;   // these frames animate with time
+    if(!dirty&&!moving&&!live)return;           // nothing changed: skip the GPU work
+    dirty=false;lastPos=pos;
+    prefetch(A);
+    setCh('A',A,pos,gl.TEXTURE0);setCh('B',B,pos,gl.TEXTURE1);
+    const tm=now/1000;
+    gl.uniform1f(L.mixv,mixv);gl.uniform1f(L.time,tm);gl.uniform1f(L.glow,glow);
+    gl.uniform1f(L.spA,A===0&&!RM?tm*.35:0);gl.uniform1f(L.spB,B===0&&!RM?tm*.35:0);
+    gl.uniform2f(L.mouse,mxs,-mys);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
   }
   requestAnimationFrame(frame);
-  return{setVisible(v){visible=v}};
+  cv.addEventListener('webglcontextlost',e=>{e.preventDefault();document.documentElement.classList.add('no3d')});
+  return{setVisible(v){if(v&&!visible)dirty=true;visible=v}};
 }
 if(has3D){try{storyApi=initStory()}catch(err){console.error(err);document.documentElement.classList.add('no3d')}}
 
@@ -877,24 +809,19 @@ addEventListener('resize',onScroll);
 onScroll();
 
 /* marquee driven by scroll velocity */
-let mpos=0;
-(function mloop(){
-  vel*=.9;const half=marq.scrollWidth/2||1;
-  mpos=(mpos+(RM?0:.7+Math.min(14,Math.abs(vel)*.12)))%half;
+let mpos=0,mOn=false,mHalf=1;
+new IntersectionObserver(es=>{mOn=es[0].isIntersecting;mHalf=marq.scrollWidth/2||1;if(mOn)requestAnimationFrame(mloop)}).observe(marq);
+function mloop(){
+  if(!mOn)return;
+  vel*=.9;
+  mpos=(mpos+(RM?0:.7+Math.min(14,Math.abs(vel)*.12)))%mHalf;
   const sk=RM?0:Math.max(-12,Math.min(12,vel*.05));
-  marq.style.transform=`translateX(${mpos}px) skewX(${sk}deg)`;
+  marq.style.transform=`translate3d(${mpos}px,0,0) skewX(${sk}deg)`;
   requestAnimationFrame(mloop);
-})();
-
-/* loader out */
-function reveal(){
-  const L=$('loader');if(!L||L.classList.contains('out'))return;
-  L.classList.add('out');document.body.classList.remove('lock');
-  document.documentElement.classList.add('ready');
-  setTimeout(()=>L.remove(),1200);
 }
-if(document.readyState==='complete')setTimeout(reveal,350);else addEventListener('load',()=>setTimeout(reveal,350));
-setTimeout(reveal,3500);
+
+/* first paint: reveal hero text right away */
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.add('ready')));
 }
 </script>
 </body>
