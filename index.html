@@ -753,29 +753,75 @@ function aiState(kind,data){
     img.alt=`הדמיית AI: ${data.prompt}`;img.classList.remove('on');
     img.onload=()=>requestAnimationFrame(()=>img.classList.add('on'));img.src=data.src;
     aiAct.innerHTML=`<a class="btn btn-wa" target="_blank" rel="noopener noreferrer" href="${wa(conceptMsg(data.prompt))}">${waIcon}<span>שליחת הרעיון בווטסאפ</span></a>
-      <a class="btn btn-ghost" href="${data.src}" download="terra-calma-concept.png">הורדת התמונה</a>
+      <a class="btn btn-ghost" href="${data.src}" download="terra-calma-concept.png" target="_blank" rel="noopener">הורדת התמונה</a>
       <button class="btn btn-ghost" type="button" id="aiAgain">הדמיה נוספת</button>`;
     $('aiAgain').onclick=()=>$('aiForm').requestSubmit();
   }
 }
+/* Hebrew → English keywords for the image model */
+const HE_EN=[['סט','set of'],['צלחות','plates'],['צלחת','plate'],['קערות','bowls'],['קערה','bowl'],['צלוחיות','small dishes'],['צלוחית','small dish'],['ספלים','mugs'],['ספל','mug'],['כוסות','cups'],['כוס','cup'],['אגרטל','vase'],['מגשים','serving platters'],['מגש','serving platter'],['פמוטים','candle holders'],['פמוט','candle holder'],['כד','jug'],['קנקן','pitcher'],['עציץ','planter'],['תבליט','wall relief'],['קיר','wall'],['חלה','challah'],['אובלי','oval'],['עגול','round'],['מרובע','square'],['גדול','large'],['קטן','small'],['עמוק','deep'],['שטוח','flat'],
+ ['מרווה','sage green'],['מנטה','pastel mint'],['תכלת','soft light blue'],['כחול','blue'],['ירוק','green'],['חום','brown'],['חמרה','terracotta'],['אדמה','earth tones'],['שמנת','cream'],['לבן','white'],['שחור','black'],['אפור','grey'],['ורוד','dusty pink'],['צהוב','yellow'],['חרדל','mustard'],['אדום','red'],['כתום','orange'],['זהב','gold rim'],['חול','sand'],['אבן','stone'],
+ ['משויש','marbled'],['שיוש','marbled'],['מנוקד','speckled'],['מבריק','glossy'],['מט','matte'],['גלזורה','glaze'],['חריטה','hand-carved engraving'],['חריטת','hand-carved'],['כיתוב','lettering'],['שוליים','rim'],['שפה','rim'],['דגים','fish motif'],['פרחים','floral motif'],['גלים','wave pattern'],['זית','olive branch motif'],['רימון','pomegranate motif'],
+ ['בית קפה','cafe'],['מסעדה','restaurant'],['ממותגים','branded with a small stamped logo'],['מתנה','gift'],['חתונה','wedding'],['שבת','shabbat'],['פסח','passover seder'],['ראש השנה','rosh hashana']];
+function toEnglish(he){
+  const found=[];let t=' '+he+' ';
+  for(const [h,e] of HE_EN){if(t.includes(h)){found.push(e);t=t.split(h).join(' ')}}
+  const nums=he.match(/\d+/g);if(nums)found.unshift(nums[0]+' pieces');
+  const latin=he.match(/[A-Za-z][A-Za-z\s,'-]*/g);if(latin)found.push(latin.join(' '));
+  return found.join(', ');
+}
+async function translate(he){
+  if(!/[֐-׿]/.test(he))return he;
+  try{
+    const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),7000);
+    const r=await fetch('https://text.pollinations.ai/'+encodeURIComponent('Translate to English. Reply with the translation only, no quotes: '+he),{signal:ctl.signal});
+    clearTimeout(to);
+    const txt=(await r.text()).trim();
+    if(r.ok&&txt&&txt.length<600&&!/[֐-׿]/.test(txt))return txt;
+  }catch(e){}
+  return toEnglish(he);
+}
+const STYLE_EN='professional studio product photograph of a handmade ceramic piece, organic minimalism, raw clay, natural glaze in earth tones and pastel mint, hand-thrown with subtle imperfections, soft natural window light, white linen surface, warm neutral background, shallow depth of field, no people, no text';
+function loadImage(src,ms){return new Promise((ok,no)=>{const im=new Image();const to=setTimeout(()=>{im.src='';no(new Error('timeout'))},ms);im.onload=()=>{clearTimeout(to);ok(im)};im.onerror=()=>{clearTimeout(to);no(new Error('img'))};im.src=src})}
+let aiNext=0;
+function cooldown(){
+  const left=Math.ceil((aiNext-Date.now())/1000);
+  if(left>0){aiGo.disabled=true;aiGo.lastChild.textContent=` אפשר שוב בעוד ${left} שנ׳`;setTimeout(cooldown,500)}
+  else{aiGo.disabled=false;aiGo.lastChild.textContent='צרו הדמיה'}
+}
 $('aiForm').onsubmit=async e=>{
   e.preventDefault();
   const prompt=aiP.value.trim();
-  if(aiBusy)return;
+  if(aiBusy||Date.now()<aiNext)return;
   if(prompt.length<4){aiState('fail','כתבו כמה מילים על הכלי שתרצו לראות.');aiAct.innerHTML='';aiP.focus();return}
   aiBusy=true;aiGo.disabled=true;aiState('busy');
   try{
-    const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),60000);
-    const r=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt}),signal:ctl.signal});
-    clearTimeout(to);
-    const j=await r.json().catch(()=>({}));
-    if(!r.ok||!j.image)throw new Error(j.error||'no image');
-    aiState('done',{src:`data:${j.mimeType||'image/png'};base64,${j.image}`,prompt});
+    // 1) server function (Netlify + Gemini), when the site runs there
+    let done=false;
+    if(!/github\.io$/.test(location.hostname)){
+      try{
+        const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),45000);
+        const r=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt}),signal:ctl.signal});
+        clearTimeout(to);
+        const j=await r.json().catch(()=>({}));
+        if(r.ok&&j.image){aiState('done',{src:`data:${j.mimeType||'image/png'};base64,${j.image}`,prompt});done=true}
+      }catch(err){}
+    }
+    // 2) free image model straight from the browser (works on any static host)
+    if(!done){
+      const en=await translate(prompt);
+      const full=`${en}. ${STYLE_EN}`.slice(0,900);
+      const seed=Math.floor(Math.random()*1e9);
+      const src=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=1024&height=1024&model=flux&nologo=true&enhance=true&seed=${seed}`;
+      await loadImage(src,120000);
+      aiState('done',{src,prompt});
+      aiNext=Date.now()+16000;
+    }
   }catch(err){
-    aiState('fail',typeof err?.message==='string'&&/[֐-׿]/.test(err.message)?err.message:'ההדמיה לא זמינה כרגע. אפשר לשלוח את התיאור ישירות בווטסאפ, ונעצב יחד את הכלי.');
-  }finally{aiBusy=false;aiGo.disabled=false}
+    aiState('fail','ההדמיה לוקחת יותר זמן מהרגיל. נסו שוב בעוד רגע, או שלחו את התיאור ישירות בווטסאפ.');
+    aiNext=Date.now()+8000;
+  }finally{aiBusy=false;cooldown()}
 };
-
 /* ================= scroll driver ================= */
 const bar=$('bar'),hdr=$('hdr'),about=$('about'),mbar=$('mbar'),order=$('order'),marq=$('marq');
 const pars=[...document.querySelectorAll('.par')];
