@@ -774,10 +774,10 @@ async function translate(he){
   if(!/[֐-׿]/.test(he))return he;
   try{
     const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),7000);
-    const r=await fetch('https://text.pollinations.ai/'+encodeURIComponent('Translate to English. Reply with the translation only, no quotes: '+he),{signal:ctl.signal});
+    const r=await fetch('https://text.pollinations.ai/'+encodeURIComponent('Translate this Hebrew description of a handmade ceramic piece into English. Ceramics terms: מרווה = sage green, חמרה = terracotta, משויש = marbled, מנוקד = speckled, תכלת = soft light blue, שמנת = cream, גלזורה = glaze, חריטה = hand-carved engraving, צלוחית = small dish, פמוט = candle holder. Reply with the English translation only, no quotes: '+he),{signal:ctl.signal});
     clearTimeout(to);
     const txt=(await r.text()).trim();
-    if(r.ok&&txt&&txt.length<600&&!/[֐-׿]/.test(txt))return txt;
+    if(r.ok&&txt&&txt.length<600&&!/[֐-׿]/.test(txt)){const kw=toEnglish(he);return kw?`${txt} (${kw})`:txt}
   }catch(e){}
   return toEnglish(he);
 }
