@@ -244,6 +244,10 @@ nav.main a:hover{color:var(--ink)}nav.main a:hover::after{transform:scaleX(1)}
 .res-act{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
 @media(max-width:900px){.cc{grid-template-columns:minmax(0,1fr)}.frame{max-width:400px}}
 
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes dash{50%{stroke-dasharray:170 200}}
+.busy .ld{display:flex;flex-direction:column;align-items:center}
+.busy .ld circle{fill:none;stroke:var(--clay);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:60 200;animation:dash 1.6s var(--ease) infinite}
 /* order */
 #order{background:var(--ink);color:var(--canvas);padding:clamp(80px,11vw,150px) 0 clamp(70px,9vw,120px);border-radius:44px 44px 0 0;overflow:hidden}
 #order .eyebrow{color:#b9ada1}
